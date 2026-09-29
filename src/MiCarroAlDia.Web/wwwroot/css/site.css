@@ -1,0 +1,741 @@
+:root {
+    --primary-blue: #0b5ed7;
+    --primary-dark: #084298;
+    --primary-light: #e7f1ff;
+    --colombia-yellow: #fdd835;
+    --touch-min-height: 48px;
+    --touch-min-width: 44px;
+}
+
+html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #212529;
+    line-height: 1.5;
+    background-color: #f4f6f9;
+}
+
+/* Contenedor optimizado para celulares desde 360px */
+.tracking-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 4px;
+}
+
+/* Hero y tarjetas */
+.hero-box {
+    background: linear-gradient(135deg, #0b5ed7 0%, #084298 100%);
+    box-shadow: 0 8px 24px rgba(11, 94, 215, 0.18);
+}
+
+.text-primary-dark {
+    color: var(--primary-dark) !important;
+}
+
+.hover-shadow {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.hover-shadow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Placa colombiana estilo automotriz */
+.plate-badge {
+    background: var(--colombia-yellow);
+    color: #111;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 6px 12px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 110px;
+}
+
+.plate-badge span {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    line-height: 1;
+}
+
+.plate-badge strong {
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    font-family: monospace, sans-serif;
+}
+
+.plate-pill {
+    background: var(--colombia-yellow);
+    color: #000;
+    border: 1px solid #333;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+.vehicle-model {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.customer-name {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Banner de estado actual */
+.current-state-banner {
+    background: var(--primary-light);
+    border-left: 5px solid var(--primary-blue);
+    padding: 14px 18px;
+    border-radius: 8px;
+}
+
+.state-label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+.state-value {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+}
+
+.state-desc {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+/* Línea de tiempo vertical */
+.timeline-steps {
+    position: relative;
+    padding-left: 28px;
+}
+
+.timeline-steps::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: 11px;
+    width: 3px;
+    background-color: #dee2e6;
+}
+
+.timeline-step {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-step:last-child {
+    margin-bottom: 0;
+}
+
+.step-indicator {
+    position: absolute;
+    left: -28px;
+    top: 2px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background-color: #fff;
+    border: 2px solid #adb5bd;
+    z-index: 1;
+}
+
+.timeline-step.completed .step-indicator {
+    background-color: #198754;
+    border-color: #198754;
+    color: #fff;
+}
+
+.timeline-step.current .step-indicator {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(11, 94, 215, 0.25);
+}
+
+.pulse-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: inline-block;
+    animation: pulse 1.6s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+    100% { transform: scale(0.9); opacity: 1; }
+}
+
+.timeline-step.pending .step-indicator {
+    background-color: #f8f9fa;
+    border-color: #ced4da;
+    color: #adb5bd;
+}
+
+.timeline-step.current .step-name {
+    color: var(--primary-blue);
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.timeline-step.completed .step-name {
+    color: #198754;
+    font-weight: 700;
+}
+
+.timeline-step.pending .step-name {
+    color: #6c757d;
+}
+
+/* Opciones táctiles para decisiones en celular (mínimo 48px de alto) */
+.decision-buttons-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media (max-width: 440px) {
+    .decision-buttons-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+.btn-decision {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: var(--touch-min-height);
+    padding: 10px 14px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 0.15s ease-in-out;
+    user-select: none;
+    text-align: center;
+}
+
+.btn-decision:hover {
+    border-color: #adb5bd;
+    background-color: #f8f9fa;
+}
+
+.btn-decision input[type="radio"] {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.btn-decision .decision-text {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Estado activo de APROBAR */
+.btn-decision.btn-approve.active {
+    background-color: #e8f5e9;
+    border-color: #2e7d32;
+    color: #1b5e20;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+}
+
+.btn-decision.btn-approve.active .decision-text {
+    color: #1b5e20;
+    font-weight: 700;
+}
+
+/* Estado activo de RECHAZAR */
+.btn-decision.btn-reject.active {
+    background-color: #ffebee;
+    border-color: #c62828;
+    color: #b71c1c;
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2);
+}
+
+.btn-decision.btn-reject.active .decision-text {
+    color: #b71c1c;
+    font-weight: 700;
+}
+
+/* Checkbox de confirmación de seguridad accesible */
+.security-check-container {
+    padding-left: 2rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+}
+
+.security-check-container .form-check-input {
+    width: 24px;
+    height: 24px;
+    margin-left: -2rem;
+    cursor: pointer;
+    border: 2px solid #dc3545;
+}
+
+/* Botón de llamada táctil */
+.btn-call {
+    min-height: var(--touch-min-height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+.btn-touch-sm {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-submit-response {
+    min-height: 54px;
+}
+
+.bg-light-danger {
+    background-color: #fff5f5 !important;
+}
+
+/* ==========================================================================
+   ESTILOS PARA EL VISOR 3D DEL VEHÍCULO Y DIAGNÓSTICO INTERACTIVO
+   ========================================================================== */
+
+.vehicle-3d-card {
+    background: #0b1329;
+    color: #f8fafc;
+    border-radius: 16px;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+    overflow: hidden;
+}
+
+.vehicle-3d-header {
+    background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 14px 18px;
+}
+
+.vehicle-3d-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background: radial-gradient(circle at 50% 30%, #1e293b 0%, #0b1329 100%);
+    border-radius: 0;
+    overflow: hidden;
+    touch-action: none;
+}
+
+@media (max-width: 576px) {
+    .vehicle-3d-wrapper {
+        height: 320px;
+    }
+}
+
+.touch-hint-pill {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(6px);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Pines 3D (Hotspots interactivos en el vehículo) */
+.vehicle-hotspots-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.vehicle-hotspot-pin {
+    position: absolute;
+    pointer-events: auto !important;
+    cursor: pointer;
+    user-select: none;
+    z-index: 25;
+    transition: transform 0.08s linear;
+}
+
+.vehicle-hotspot-pin .pin-marker {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #0284c7;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.vehicle-hotspot-pin:hover .pin-marker,
+.vehicle-hotspot-pin:focus .pin-marker {
+    transform: scale(1.15);
+}
+
+.vehicle-hotspot-pin .pin-icon {
+    font-size: 1.05rem;
+    line-height: 1;
+}
+
+.vehicle-hotspot-pin .pin-pulse {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 2px solid #38bdf8;
+    animation: pinPulseAnimation 2s infinite ease-out;
+    opacity: 0.8;
+}
+
+@keyframes pinPulseAnimation {
+    0% { transform: scale(0.9); opacity: 1; }
+    70% { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.vehicle-hotspot-pin.pulse-alert .pin-marker {
+    background: #ef4444;
+}
+
+.vehicle-hotspot-pin.pulse-alert .pin-pulse {
+    border-color: #ef4444;
+}
+
+.vehicle-hotspot-pin.approved .pin-marker {
+    background: #10b981;
+}
+
+.vehicle-hotspot-pin.approved .pin-pulse {
+    border-color: #10b981;
+    animation-duration: 3s;
+}
+
+.vehicle-hotspot-pin.rejected .pin-marker {
+    background: #64748b;
+}
+
+.vehicle-hotspot-pin .pin-card {
+    position: absolute;
+    bottom: 46px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 170px;
+    max-width: 220px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    text-align: center;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    white-space: normal;
+}
+
+.vehicle-hotspot-pin .pin-title {
+    display: block;
+    color: #f8fafc;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.vehicle-hotspot-pin .pin-desc {
+    display: block;
+    color: #cbd5e1;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    margin-top: 2px;
+}
+
+.vehicle-hotspot-pin .pin-cta {
+    display: block;
+    color: #38bdf8;
+    font-size: 0.68rem;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* Barra de herramientas para controles rápidos de cámara */
+.viewer-toolbar {
+    background: #0f172a;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-viewer-tool {
+    background: rgba(30, 41, 59, 0.9);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-viewer-tool:hover {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #3b82f6;
+    transform: translateY(-1px);
+}
+
+.btn-viewer-tool.active {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+/* Banner de "¿Qué le están haciendo a tu carro ahora?" */
+.status-doing-banner {
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(30, 41, 59, 0.4) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 12px 14px 14px 14px;
+}
+
+.status-doing-badge {
+    background: #0284c7;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+.status-doing-text {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Resaltado temporal al hacer clic en un punto 3D */
+.highlight-from-3d {
+    animation: highlightPulse 2.5s ease-out;
+    border-color: #0284c7 !important;
+}
+
+@keyframes highlightPulse {
+    0% { box-shadow: 0 0 0 6px rgba(2, 132, 199, 0.5); transform: scale(1.02); }
+    50% { box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.3); }
+    100% { box-shadow: none; transform: scale(1); }
+}
+
+/* Stepper visual horizontal de avance moderno */
+.stepper-progress-box {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 18px 16px;
+}
+
+.stepper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.stepper-pills-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 10px;
+    padding: 0 8px;
+}
+
+.stepper-track-bg {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    right: 24px;
+    height: 4px;
+    background-color: #e2e8f0;
+    z-index: 1;
+}
+
+.stepper-track-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981 0%, #0284c7 100%);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.stepper-node {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 60px;
+}
+
+.stepper-node-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #cbd5e1;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.stepper-node.completed .stepper-node-circle {
+    background: #10b981;
+    border-color: #10b981;
+    color: #ffffff;
+}
+
+.stepper-node.current .stepper-node-circle {
+    background: #0284c7;
+    border-color: #bae6fd;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.25);
+    animation: pulseCurrentStep 2s infinite;
+}
+
+@keyframes pulseCurrentStep {
+    0% { box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(2, 132, 199, 0.1); }
+    100% { box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.3); }
+}
+
+.stepper-node-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-top: 6px;
+    line-height: 1.15;
+}
+
+.stepper-node.current .stepper-node-label {
+    color: #0284c7;
+    font-weight: 800;
+}
+
+.stepper-node.completed .stepper-node-label {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Botón "Ver en 3D" en cada tarjeta de cotización */
+.btn-focus-3d {
+    background: #f0f9ff;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+
+.btn-focus-3d:hover {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+}
+
+/* Barra flotante para móviles con total en vivo */
+.floating-mobile-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-top: 2px solid #0284c7;
+    padding: 10px 16px;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+@media (min-width: 768px) {
+    .floating-mobile-bar {
+        display: none;
+    }
+}

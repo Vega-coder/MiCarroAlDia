@@ -1,0 +1,16 @@
+## Visual Studio / C# Ignore
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Publicaciones y temporales
+publish/
+publish-test/
+*.log
+
+## Entornos locales
+appsettings.Local.json

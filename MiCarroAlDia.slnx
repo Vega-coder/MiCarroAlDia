@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MiCarroAlDia.Application/MiCarroAlDia.Application.csproj" />
+    <Project Path="src/MiCarroAlDia.Domain/MiCarroAlDia.Domain.csproj" />
+    <Project Path="src/MiCarroAlDia.Infrastructure/MiCarroAlDia.Infrastructure.csproj" />
+    <Project Path="src/MiCarroAlDia.Web/MiCarroAlDia.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MiCarroAlDia.Tests/MiCarroAlDia.Tests.csproj" />
+  </Folder>
+</Solution>

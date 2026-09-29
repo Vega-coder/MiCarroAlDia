@@ -11,6 +11,7 @@
 publish/
 publish-test/
 *.log
+*.zip
 
 ## Entornos locales
 appsettings.Local.json

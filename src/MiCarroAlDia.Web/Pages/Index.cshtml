@@ -53,18 +53,7 @@
             </div>
         </div>
 
-        @if (TempData["GlobalMessage"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade show border-0 bg-success-subtle text-success-emphasis shadow-sm mt-3" role="alert">
-                <div class="d-flex align-items-center gap-2">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <strong>Actualización del Sistema:</strong> @TempData["GlobalMessage"]
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
-        }
+        @* Alerta de reinicio manejada vía SweetAlert2 en _Layout.cshtml *@
     </div>
 
     <!-- Acceso Rápido a los Escenarios de Demostración -->

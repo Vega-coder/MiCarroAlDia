@@ -1395,3 +1395,166 @@ a:hover {
     padding: 24px 0;
     margin-top: 48px;
 }
+
+/* ==========================================================================
+   SWEETALERT2 — PERSONALIZACIÓN PARA MI CARRO AL DÍA
+   ========================================================================== */
+
+/* Toast de éxito en esquina superior derecha */
+.swal-toast-card {
+    font-family: var(--font-sans) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-hover) !important;
+}
+
+/* Popup estándar */
+.swal2-popup {
+    font-family: var(--font-sans) !important;
+    border-radius: var(--radius-lg) !important;
+}
+
+.swal2-title {
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--slate-900) !important;
+}
+
+.swal2-html-container {
+    color: var(--slate-600) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+}
+
+.swal2-confirm {
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    padding: 10px 24px !important;
+    font-family: var(--font-sans) !important;
+}
+
+/* En pantallas pequeñas, el popup ocupa más ancho */
+@media (max-width: 576px) {
+    .swal2-popup {
+        width: 92vw !important;
+        max-width: 400px !important;
+        font-size: 0.9rem !important;
+    }
+
+    .swal2-title {
+        font-size: 1.1rem !important;
+    }
+
+    .swal2-html-container {
+        font-size: 0.88rem !important;
+    }
+
+    /* Toast en mobile: posición top-center para mejor visibilidad */
+    .swal2-container.swal2-top-end {
+        top: 8px !important;
+        right: 8px !important;
+    }
+}
+
+/* ==========================================================================
+   MEJORAS RESPONSIVE ADICIONALES — MOBILE FIRST
+   ========================================================================== */
+
+/* Contenedor principal más cómodo en móviles pequeños */
+@media (max-width: 480px) {
+    .tracking-container {
+        padding: 0 4px;
+    }
+
+    /* Stepper: en pantallas muy pequeñas reducir tamaño de nodos */
+    .stepper-node {
+        width: 48px;
+    }
+
+    .stepper-node-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .stepper-node-label {
+        font-size: 0.64rem;
+    }
+
+    /* Ficha de vehículo más compacta */
+    .vehicle-model-title {
+        font-size: 1.08rem;
+    }
+
+    .plate-badge {
+        min-width: 100px;
+    }
+
+    .plate-badge .plate-digits {
+        font-size: 1.2rem;
+    }
+
+    /* Botones de decisión apilados verticalmente en pantallas muy pequeñas */
+    .decision-btn-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Comprobante: valores numéricos más legibles */
+    .receipt-total-amount {
+        font-size: 1.4rem !important;
+    }
+
+    /* Hero de la portada */
+    .hero-showcase h1 {
+        font-size: 1.6rem !important;
+    }
+
+    .hero-showcase p {
+        font-size: 0.9rem !important;
+    }
+
+    .hero-stats-row {
+        gap: 8px !important;
+    }
+}
+
+/* Navbar en mobile: menú colapsado más limpio */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        padding: 16px 0 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: 8px;
+    }
+
+    .navbar-collapse .d-flex {
+        padding: 8px 0 4px;
+        flex-wrap: wrap;
+        gap: 8px !important;
+    }
+
+    .workshop-pill-online {
+        display: inline-flex !important;
+    }
+}
+
+/* Formulario de token en mobile: botón debajo del campo */
+@media (max-width: 576px) {
+    .token-search-form .row {
+        flex-direction: column;
+    }
+
+    .token-search-form .col-auto {
+        width: 100%;
+    }
+
+    .token-search-form button {
+        width: 100%;
+    }
+}
+
+/* Tarjetas de escenario: en pantallas muy pequeñas sin columnas innecesarias */
+@media (max-width: 400px) {
+    .scenario-card .card-body {
+        padding: 12px !important;
+    }
+}

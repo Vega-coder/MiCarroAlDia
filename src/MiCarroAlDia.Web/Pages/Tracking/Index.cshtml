@@ -102,28 +102,7 @@
             </div>
         </header>
 
-        @if (TempData["SuccessFeedback"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade show border-success shadow-sm mb-4" role="alert">
-                <div class="d-flex align-items-center gap-2">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-success">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                    <strong>Respuesta registrada con éxito:</strong>
-                </div>
-                <p class="mb-0 mt-1 small">@TempData["SuccessFeedback"]</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
-        }
-
-        @if (TempData["InfoFeedback"] != null)
-        {
-            <div class="alert alert-info alert-dismissible fade show shadow-sm mb-4" role="alert">
-                <p class="mb-0 small">@TempData["InfoFeedback"]</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
-        }
+        @* Alertas de éxito e info se muestran vía SweetAlert2 desde _Layout.cshtml *@
 
         <!-- Bloque 1: Stepper Visual Profesional de Avance -->
         <section class="stepper-progress-box mb-4" aria-labelledby="heading-progress">

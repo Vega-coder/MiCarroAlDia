@@ -187,11 +187,11 @@ dotnet test --verbosity normal
 
 ### Salida Real de la Ejecución:
 ```text
-Pruebas totales: 36
-     Correcto: 36
+Pruebas totales: 44
+     Correcto: 44
   Con error: 0
     Omitido: 0
-Tiempo total: 1,4292 Segundos
+Tiempo total: 0,631 Segundos
 Compilación correcta. 0 Advertencia(s), 0 Errores.
 ```
 
@@ -232,6 +232,14 @@ Compilación correcta. 0 Advertencia(s), 0 Errores.
 | **HTTP-04** (Token vencido muestra teléfono) | `Tracking/Index.cshtml` | `Get_Tracking_ExpiredToken_ShowsPhoneAndVencido` | Integración HTTP | **SUPERADO** |
 | **HTTP-05** (Token inválido sin fuga de datos)| `Tracking/Index.cshtml` | `Get_Tracking_InvalidToken_ReturnsSecurityMessageWithoutDataLeak` | Integración HTTP | **SUPERADO** |
 | **HTTP-06** (Redirección corta de WhatsApp) | `Program.cs` $\rightarrow$ `/t/{token}` | `Get_ShortWhatsAppLink_RedirectsToTrackingPage` | Integración HTTP | **SUPERADO** |
+| **P1-01** (Dashboard de taller y conteos) | `GetWorkshopDashboardUseCase.cs` | `GetWorkshopDashboard_ReturnsCorrectOrdersAndCounters` | Caso de Uso | **SUPERADO** |
+| **P1-02** (Avance secuencial de vehículo) | `AdvanceWorkOrderProgressUseCase.cs` | `AdvanceWorkOrderProgress_ValidNextState_AdvancesSuccessfully` | Caso de Uso | **SUPERADO** |
+| **P1-03** (Bloqueo de avance en entregado) | `AdvanceWorkOrderProgressUseCase.cs` | `AdvanceWorkOrderProgress_WhenAlreadyDelivered_ThrowsDomainValidationException` | Caso de Uso | **SUPERADO** |
+| **P1-04** (Crear orden y enlace WhatsApp) | `CreateWorkOrderUseCase.cs` | `CreateWorkOrder_CreatesOrderAndWhatsAppLink` | Caso de Uso | **SUPERADO** |
+| **P1-05** (Crear cotización 48h vigencia) | `CreateAdditionalQuoteUseCase.cs` | `CreateAdditionalQuote_ValidItems_SavesQuoteSuccessfully` | Caso de Uso | **SUPERADO** |
+| **P1-06** (Evitar cotización duplicada) | `CreateAdditionalQuoteUseCase.cs` | `CreateAdditionalQuote_WhenQuoteAlreadyExists_ThrowsDomainConflictException` | Caso de Uso | **SUPERADO** |
+| **P1-07** (Carga panel taller HTTP 200) | `Taller/Index.cshtml` | `Get_Taller_ReturnsSuccessAndShowsDashboard` | Integración HTTP | **SUPERADO** |
+| **P1-08** (Redirección /Marcela -> /Taller)| `Program.cs` $\rightarrow$ `/Marcela` | `Get_Marcela_RedirectsToTaller` | Integración HTTP | **SUPERADO** |
 
 ---
 
@@ -347,6 +355,16 @@ Y esa variables?
 ### Prompt 17
 ```text
 Perfecto ahora dame en la carpeta que hicimos el proyecto, pero que sea zip para pasarla a alguien por whatsapp haz un archivo resumen de las implementaciones, requisitos, arquitectura que usamos, conexiones, tecnologia, despliegue, docker etc y los promps que te envie para generarla y alñade esto a los proms Chatgpt 6 max : Analiza esto y dame un resumen y requisitos funcionales y no funcionales, vamos a ahcer en  c# en vs code 2026 con clean arquitecture, decide si web o mobile y dame todo de manera detallada ...
+```
+
+### Prompt 18
+```text
+Ahi solamente esta la parte del cliente verdad?
+```
+
+### Prompt 19
+```text
+Hagamos esa parte tambien
 ```
 
 ---

@@ -40,6 +40,15 @@ public class InMemoryWorkOrderRepository : IWorkOrderRepository
         IReadOnlyList<WorkOrder> list = _db.WorkOrders.Values.ToList();
         return Task.FromResult(list);
     }
+
+    public Task SaveAsync(WorkOrder order, CancellationToken ct = default)
+    {
+        lock (_db.GetLock())
+        {
+            _db.WorkOrders[order.Id] = order;
+        }
+        return Task.CompletedTask;
+    }
 }
 
 public class InMemoryAdditionalQuoteRepository : IAdditionalQuoteRepository
@@ -77,6 +86,16 @@ public class InMemoryAdditionalQuoteRepository : IAdditionalQuoteRepository
 
         return Task.CompletedTask;
     }
+
+    public Task AddAsync(AdditionalQuote quote, CancellationToken ct = default)
+    {
+        lock (_db.GetLock())
+        {
+            _db.Quotes[quote.Id] = quote;
+        }
+
+        return Task.CompletedTask;
+    }
 }
 
 public class InMemoryCustomerAccessLinkRepository : ICustomerAccessLinkRepository
@@ -94,9 +113,25 @@ public class InMemoryCustomerAccessLinkRepository : ICustomerAccessLinkRepositor
         return Task.FromResult(link);
     }
 
+    public Task<CustomerAccessLink?> GetByWorkOrderIdAsync(string workOrderId, CancellationToken ct = default)
+    {
+        var link = _db.AccessLinks.Values.FirstOrDefault(l => l.WorkOrderId == workOrderId && l.IsActive);
+        return Task.FromResult(link);
+    }
+
     public Task<IReadOnlyList<CustomerAccessLink>> GetAllActiveAsync(CancellationToken ct = default)
     {
         IReadOnlyList<CustomerAccessLink> list = _db.AccessLinks.Values.Where(l => l.IsActive).ToList();
         return Task.FromResult(list);
+    }
+
+    public Task AddAsync(CustomerAccessLink link, CancellationToken ct = default)
+    {
+        lock (_db.GetLock())
+        {
+            _db.AccessLinks[link.Token] = link;
+        }
+
+        return Task.CompletedTask;
     }
 }

@@ -43,9 +43,15 @@ public static class DependencyInjection
             services.AddScoped<ICustomerAccessLinkRepository, InMemoryCustomerAccessLinkRepository>();
         }
 
-        // Casos de uso de la aplicación
+        // Casos de uso de la aplicación - Cliente
         services.AddScoped<GetCustomerTrackingUseCase>();
         services.AddScoped<SubmitCustomerResponseUseCase>();
+
+        // Casos de uso de la aplicación - Taller (Panel de Marcela P1)
+        services.AddScoped<MiCarroAlDia.Application.WorkshopManagement.GetWorkshopDashboardUseCase>();
+        services.AddScoped<MiCarroAlDia.Application.WorkshopManagement.AdvanceWorkOrderProgressUseCase>();
+        services.AddScoped<MiCarroAlDia.Application.WorkshopManagement.CreateWorkOrderUseCase>();
+        services.AddScoped<MiCarroAlDia.Application.WorkshopManagement.CreateAdditionalQuoteUseCase>();
 
         return services;
     }

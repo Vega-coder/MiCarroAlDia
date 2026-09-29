@@ -44,6 +44,7 @@ app.UseAuthorization();
 
 // Enlace corto tipo WhatsApp: /t/{token} -> /Tracking/{token}
 app.MapGet("/t/{token}", (string token) => Results.Redirect($"/Tracking/{token}"));
+app.MapGet("/Marcela", () => Results.Redirect("/Taller"));
 
 app.MapStaticAssets();
 app.MapRazorPages()

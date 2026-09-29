@@ -38,6 +38,20 @@ public class PostgresWorkOrderRepository : IWorkOrderRepository
     {
         return await _context.WorkOrders.ToListAsync(ct);
     }
+
+    public async Task SaveAsync(WorkOrder order, CancellationToken ct = default)
+    {
+        var existing = await _context.WorkOrders.FirstOrDefaultAsync(w => w.Id == order.Id, ct);
+        if (existing == null)
+        {
+            _context.WorkOrders.Add(order);
+        }
+        else
+        {
+            _context.Entry(existing).CurrentValues.SetValues(order);
+        }
+        await _context.SaveChangesAsync(ct);
+    }
 }
 
 public class PostgresAdditionalQuoteRepository : IAdditionalQuoteRepository
@@ -71,6 +85,12 @@ public class PostgresAdditionalQuoteRepository : IAdditionalQuoteRepository
         _context.Entry(existing).CurrentValues.SetValues(quote);
         await _context.SaveChangesAsync(ct);
     }
+
+    public async Task AddAsync(AdditionalQuote quote, CancellationToken ct = default)
+    {
+        _context.Quotes.Add(quote);
+        await _context.SaveChangesAsync(ct);
+    }
 }
 
 public class PostgresCustomerAccessLinkRepository : ICustomerAccessLinkRepository
@@ -87,8 +107,19 @@ public class PostgresCustomerAccessLinkRepository : ICustomerAccessLinkRepositor
         return _context.AccessLinks.FirstOrDefaultAsync(l => l.Token == token, ct);
     }
 
+    public Task<CustomerAccessLink?> GetByWorkOrderIdAsync(string workOrderId, CancellationToken ct = default)
+    {
+        return _context.AccessLinks.FirstOrDefaultAsync(l => l.WorkOrderId == workOrderId && l.IsActive, ct);
+    }
+
     public async Task<IReadOnlyList<CustomerAccessLink>> GetAllActiveAsync(CancellationToken ct = default)
     {
         return await _context.AccessLinks.Where(l => l.IsActive).ToListAsync(ct);
+    }
+
+    public async Task AddAsync(CustomerAccessLink link, CancellationToken ct = default)
+    {
+        _context.AccessLinks.Add(link);
+        await _context.SaveChangesAsync(ct);
     }
 }

@@ -263,6 +263,28 @@ Es 100% responsive? puedes usar sweetalert para las alertas?
 
 ---
 
+### Prompt 19
+* **Momento:** Consulta sobre el alcance de la entrega (cliente vs taller).
+* **Texto completo enviado:**
+```text
+Ahi solamente esta la parte del cliente verdad?
+```
+* **Por qué se escribió así:**
+   Pregunta de verificación para confirmar que la entrega realizada cubría la prioridad P0 (recorrido del cliente) y evaluar la incorporación del panel administrativo interno del taller (P1).
+
+---
+
+### Prompt 20
+* **Momento:** Solicitud de desarrollo del panel administrativo del taller (Fase P1).
+* **Texto completo enviado:**
+```text
+Hagamos esa parte tambien
+```
+* **Por qué se escribió así:**
+   Instrucción para construir el Panel de Gestión de Taller de Marcela (`/Taller` o `/Marcela`), habilitando el control de órdenes, avance secuencial de etapas del vehículo, creación de nuevos ingresos con generación de enlaces WhatsApp, y publicación de cotizaciones adicionales con vigencia de 48 horas.
+
+---
+
 ## 2. Estrategia del Desarrollador y Decisiones Técnicas
 
 ### ¿Qué se construyó y por qué?

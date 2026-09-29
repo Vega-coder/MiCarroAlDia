@@ -931,10 +931,18 @@
 
             if (hasErrors) {
                 e.preventDefault();
-                alert('Por favor selecciona una decisión (Autorizar o No autorizar) para cada ítem. Si decides no realizar un trabajo de seguridad vial, debes marcar la casilla de confirmación requerida.');
-                if (firstErrorEl) {
-                    firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Decisiones incompletas',
+                    html: '<p style="text-align:left;margin:0">Por favor selecciona <strong>Autorizar</strong> o <strong>No autorizar</strong> para cada ítem.<br><br>Si decides no realizar un trabajo de <strong>seguridad vial</strong>, debes marcar la casilla de confirmación requerida.</p>',
+                    confirmButtonText: 'Entendido',
+                    confirmButtonColor: '#d97706',
+                    customClass: { confirmButton: 'btn-lg' }
+                }).then(() => {
+                    if (firstErrorEl) {
+                        firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
             }
         });
 

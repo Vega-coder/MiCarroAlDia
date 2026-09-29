@@ -76,6 +76,8 @@ Conectemos esto a databasa eso es supabase
 * **Momento:** Revisión técnica rigurosa, auditoría de código, corrección de defectos y pruebas de regresión.
 * **Texto completo enviado:**
 ```text
+Chatgpt 6 max : Analiza esto y dame un resumen y requisitos funcionales y no funcionales, vamos a ahcer en  c# en vs code 2026 con clean arquitecture, decide si web o mobile y dame todo de manera detallada
+
 Revisa la implementación existente antes de agregar funcionalidades. No rehagas la solución ni cambies Razor Pages o la arquitectura sin justificar un problema concreto.
 Primero, compila y ejecuta las pruebas. Entrega los comandos utilizados y la salida real. Si no puedes ejecutar algo, indícalo expresamente y no lo presentes como verificado.
 Presenta una matriz con: requisito, archivo y método que lo implementa, prueba que lo comprueba y resultado observado. Distingue pruebas de dominio, pruebas de casos de uso e integración HTTP.
@@ -157,6 +159,96 @@ Publica los cambio al repo, con eso se actualiza automaticamente la publicada?
 ```
 * **Por qué se escribió así:**
    Solicitud para versionar y subir el código actualizado a GitHub (`Vega-coder/MiCarroAlDia`), preguntando si el repositorio cuenta con actualización automática (*Auto-Deploy*) en la plataforma donde se encuentre publicada la aplicación.
+
+---
+
+### Prompt 11
+* **Momento:** Consulta de viabilidad técnica sobre despliegue en Vercel.
+* **Texto completo enviado:**
+```text
+como podemos publicar en vercel el proyecto?
+```
+* **Por qué se escribió así:**
+   Indagación sobre alternativas de hosting PaaS tipo Vercel, evaluando la viabilidad de publicar una solución ASP.NET Core Razor Pages en .NET 10 y recibiendo la recomendación de usar plataformas compatibles con contenedores como Render, Railway o Azure App Service.
+
+---
+
+### Prompt 12
+* **Momento:** Creación del repositorio remoto y sincronización de código en Git.
+* **Texto completo enviado:**
+```text
+Crea el repo y subelo a git
+```
+* **Por qué se escribió así:**
+   Instrucción para inicializar Git local, configurar `.gitignore`, `.dockerignore`, `Dockerfile`, crear el repositorio remoto `Vega-coder/MiCarroAlDia` en GitHub mediante GitHub CLI y realizar el primer push a la rama `main`.
+
+---
+
+### Prompt 13
+* **Momento:** Navegación en el panel de Render para selección del tipo de servicio.
+* **Texto completo enviado:**
+```text
+Donde le doy para publicarlo
+[Adjunta captura de dashboard.render.com mostrando opciones: Static Sites, Web Services, Private Services, etc.]
+```
+* **Por qué se escribió así:**
+   Solicitud de orientación visual dentro de Render para elegir la opción correcta (`Web Services`) capaz de ejecutar el contenedor Docker de ASP.NET Core.
+
+---
+
+### Prompt 14
+* **Momento:** Confirmación de autorización de GitHub CLI.
+* **Texto completo enviado:**
+```text
+Ya lo autorice
+```
+* **Por qué se escribió así:**
+   Notificación de que el código OAuth de un solo uso (`5FA1-AE75`) fue autorizado en el navegador, permitiendo al CLI completar la creación y subida del repositorio remoto.
+
+---
+
+### Prompt 15
+* **Momento:** Confirmación previa al despliegue en Render.
+* **Texto completo enviado:**
+```text
+Ahi?
+[Adjunta captura de pantalla con los campos de configuración en Render: Docker, main, Ohio, Free tier y botón Deploy web service]
+```
+* **Por qué se escribió así:**
+   Verificación visual de que los parámetros autocompletados por Render coincidieran con la configuración adecuada antes de iniciar la compilación.
+
+---
+
+### Prompt 16
+* **Momento:** Consulta sobre la obligatoriedad de variables de entorno.
+* **Texto completo enviado:**
+```text
+Y esa variables?
+```
+* **Por qué se escribió así:**
+   Pregunta para aclarar si se requiere configurar variables de entorno obligatoriamente en Render o si el sistema puede operar de inmediato con la persistencia en memoria y datos semilla.
+
+---
+
+### Prompt 17
+* **Momento:** Solicitud de empaquetado ZIP para distribución y generación del documento resumen integral.
+* **Texto completo enviado:**
+```text
+Perfecto ahora dame en la carpeta que hicimos el proyecto, pero que sea zip para pasarla a alguien por whatsapp haz un archivo resumen de las implementaciones, requisitos, arquitectura que usamos, conexiones, tecnologia, despliegue, docker etc y los promps que te envie para generarla y alñade esto a los proms Chatgpt 6 max : Analiza esto y dame un resumen y requisitos funcionales y no funcionales, vamos a ahcer en  c# en vs code 2026 con clean arquitecture, decide si web o mobile y dame todo de manera detallada
+
+Revisa la implementación existente antes de agregar funcionalidades. No rehagas la solución ni cambies Razor Pages o la arquitectura sin justificar un problema concreto.
+Primero, compila y ejecuta las pruebas. Entrega los comandos utilizados y la salida real. Si no puedes ejecutar algo, indícalo expresamente y no lo presentes como verificado.
+Presenta una matriz con: requisito, archivo y método que lo implementa, prueba que lo comprueba y resultado observado. Distingue pruebas de dominio, pruebas de casos de uso e integración HTTP.
+Prioriza la revisión de la operación completa de envío: validación, registro y bloqueo. Comprueba dos envíos simultáneos, ausencia de escrituras parciales, ítems repetidos u omitidos, identificadores ajenos y manipulación de valores enviados desde el navegador.
+Verifica que un enlace autorice una orden específica, no solamente un taller. Prueba accesos cruzados entre carros del mismo taller y entre talleres distintos.
+Aclara el comportamiento de la recarga: volver a consultar debe mostrar el comprobante, no lanzar un error al usuario. Un segundo envío no debe modificar la respuesta original. Comprueba también que una respuesta registrada siga siendo “respondida” después del vencimiento.
+Revisa los rechazos de seguridad y el vencimiento en el servidor, sin depender exclusivamente de JavaScript. Identifica cómo se protegen los formularios y cómo se presentan los errores.
+Corrige la documentación: $416.500 y $357.000 pertenecen al ejemplo de análisis, no al enunciado original. Conserva como supuestos las decisiones no especificadas por el cliente. No declares conformidad WCAG AA completa sin evidencia.
+Mantén el portal y los tokens de demostración exclusivamente para datos ficticios. Revisa que el documento “Prompts y estrategia” contenga los prompts reales completos y en orden, sin reconstrucciones.
+Corrige únicamente los defectos encontrados y agrega sus pruebas de regresión. Al terminar, informa qué verificaste, qué corregiste y qué sigue pendiente. No incorpores todavía Supabase ni despliegue en esta revisión.
+```
+* **Por qué se escribió así:**
+   Consolidación final de la entrega: generación de un archivo comprimido limpio para envío instantáneo por WhatsApp, redacción del documento ejecutivo de arquitectura y síntesis técnica, y actualización rigurosa del registro de prompts.
 
 ---
 

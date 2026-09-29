@@ -36,10 +36,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-if (!app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection();
-}
+// HttpsRedirection omitido en HTTP local
 
 app.UseRouting();
 

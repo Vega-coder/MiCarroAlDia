@@ -47,6 +47,9 @@ public class IndexModel : PageModel
             return Page();
         }
 
+        ViewData["WorkshopName"] = Tracking.WorkshopName;
+        ViewData["WorkshopPhone"] = Tracking.WorkshopPhone;
+
         // Inicializar el modelo del formulario si la cotización está pendiente
         if (Tracking.Quote != null && Tracking.Quote.Status == QuoteStatus.Pendiente)
         {
@@ -107,6 +110,11 @@ public class IndexModel : PageModel
 
             ModelState.AddModelError(string.Empty, result.ErrorMessage ?? "Ocurrió un error al procesar tu respuesta.");
             Tracking = tracking;
+            if (tracking != null)
+            {
+                ViewData["WorkshopName"] = tracking.WorkshopName;
+                ViewData["WorkshopPhone"] = tracking.WorkshopPhone;
+            }
             return Page();
         }
 

@@ -24,6 +24,22 @@ public static class PostgresSeeder
             return; // Ya fue sembrado
         }
 
+        await SeedDataAsync(context, timeProvider);
+    }
+
+    public static async Task ResetAsync(MiCarroAlDiaDbContext context, TimeProvider timeProvider)
+    {
+        context.AccessLinks.RemoveRange(context.AccessLinks);
+        context.Quotes.RemoveRange(context.Quotes);
+        context.WorkOrders.RemoveRange(context.WorkOrders);
+        context.Workshops.RemoveRange(context.Workshops);
+        await context.SaveChangesAsync();
+
+        await SeedDataAsync(context, timeProvider);
+    }
+
+    private static async Task SeedDataAsync(MiCarroAlDiaDbContext context, TimeProvider timeProvider)
+    {
         var nowUtc = timeProvider.GetUtcNow();
 
         // 1. Talleres

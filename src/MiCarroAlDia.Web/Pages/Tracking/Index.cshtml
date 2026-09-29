@@ -3,36 +3,46 @@
 @using MiCarroAlDia.Domain.Enums
 @{
     ViewData["Title"] = Model.Tracking != null 
-        ? $"Avance de {Model.Tracking.VehiclePlate} - Mi Carro al Día" 
-        : "Consulta de vehículo - Mi Carro al Día";
+        ? $"Seguimiento {Model.Tracking.VehiclePlate} · MiCarroAlDía" 
+        : "Consulta de Vehículo · MiCarroAlDía";
 }
 
 <div class="tracking-container">
     @if (Model.IsNotFound || Model.Tracking == null)
     {
-        <div class="card error-card">
-            <div class="card-header bg-danger text-white">
-                <h1 class="h4 mb-0">Enlace no disponible o inválido</h1>
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden my-4">
+            <div class="p-4 bg-danger text-white d-flex align-items-center gap-3">
+                <div class="rounded-circle bg-white text-danger p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="h5 fw-bold mb-0">Enlace no disponible o inválido</h1>
+                    <small class="opacity-75">No se encontró información asociada a este token de acceso</small>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="lead">
-                    No encontramos información para este enlace o el enlace ha caducado.
+            <div class="card-body p-4">
+                <p class="text-slate-600 mb-3">
+                    Por seguridad y estricta privacidad de nuestros clientes, cada orden de servicio cuenta con una clave digital temporal única y encriptada.
                 </p>
-                <p>
-                    Por seguridad y para proteger la privacidad de cada cliente, cada enlace es único y está asociado exclusivamente a su vehículo.
-                </p>
-                <div class="alert alert-info">
-                    <strong>¿Necesitas consultar tu vehículo?</strong><br />
-                    Comunícate directamente con tu asesora de servicio en el taller <strong>Autofrenos del Norte</strong> para que te comparta un nuevo enlace por WhatsApp.
-                    <div class="mt-2">
-                        <a href="tel:+576044441234" class="btn btn-primary btn-call">
-                            📞 Llamar al taller: +57 (604) 444-1234
-                        </a>
-                    </div>
+                <div class="p-3 bg-light rounded-3 border mb-4">
+                    <strong class="d-block text-slate-800 mb-1">¿Necesitas consultar el estado de tu vehículo?</strong>
+                    <span class="text-slate-600 small d-block mb-3">
+                        Comunícate con nuestro equipo de servicio para validar tu número de placa o solicitar un enlace actualizado por WhatsApp o mensaje directo.
+                    </span>
+                    <a href="tel:+576044441234" class="btn btn-primary d-inline-flex align-items-center gap-2 px-3 py-2 fw-semibold">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>Contactar al Taller: (604) 444-1234</span>
+                    </a>
                 </div>
-                <div class="mt-3">
-                    <a asp-page="/Index" class="btn btn-outline-secondary">← Volver al inicio</a>
-                </div>
+                <a asp-page="/Index" class="btn btn-outline-secondary btn-sm">
+                    ← Volver al Panel de Demostración
+                </a>
             </div>
         </div>
     }
@@ -47,35 +57,45 @@
 
         <!-- Encabezado de Identificación del Vehículo y Taller -->
         <header class="app-header mb-4">
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                 <div>
-                    <span class="badge bg-primary text-uppercase px-3 py-2 fs-6 shadow-sm">Mi Carro al Día</span>
-                    <h1 class="h3 mt-2 mb-0 text-primary-dark">@t.WorkshopName</h1>
-                    <p class="text-muted mb-0 small">@t.WorkshopAddress — @t.WorkshopCity</p>
+                    <span class="badge bg-slate-900 text-white text-uppercase px-2 py-1 fs-7 fw-bold letter-spacing-1">
+                        Taller Autorizado
+                    </span>
+                    <h1 class="h4 mt-1 mb-0 text-slate-900 fw-bold">@t.WorkshopName</h1>
+                    <p class="text-slate-500 mb-0 small">@t.WorkshopAddress · @t.WorkshopCity</p>
                 </div>
-                <div class="text-end">
-                    <a href="tel:@t.WorkshopPhone" class="btn btn-outline-primary btn-sm btn-touch-sm shadow-sm" title="Llamar al taller">
-                        📞 @t.WorkshopPhone
+                <div>
+                    <a href="tel:@t.WorkshopPhone" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-2 fw-semibold" title="Llamar al taller">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>@t.WorkshopPhone</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Ficha del Vehículo Amigable e Intuitiva -->
-            <div class="vehicle-card mt-3 shadow-sm bg-white p-3 rounded-3 border">
+            <!-- Ficha del Vehículo Estilo Passport Automotriz -->
+            <div class="vehicle-header-card">
                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
                     <div class="d-flex align-items-center gap-3">
-                        <div class="plate-badge" aria-label="Placa del vehículo">
-                            <span>COLOMBIA</span>
-                            <strong>@t.VehiclePlate</strong>
+                        <div class="plate-badge" aria-label="Placa @t.VehiclePlate">
+                            <span class="plate-country">COLOMBIA</span>
+                            <strong class="plate-digits">@t.VehiclePlate</strong>
+                            <span class="plate-city">@t.WorkshopCity</span>
                         </div>
                         <div>
-                            <div class="vehicle-model">@t.VehicleModel</div>
-                            <div class="customer-name">¡Hola, <strong>@t.CustomerName</strong>! 👋</div>
+                            <div class="vehicle-model-title">@t.VehicleModel</div>
+                            <div class="customer-greeting">
+                                <span>Titular:</span>
+                                <strong>@t.CustomerName</strong>
+                            </div>
                         </div>
                     </div>
                     <div>
-                        <span class="badge @(t.CurrentProgressState == VehicleProgressState.ListoParaEntregar ? "bg-success" : "bg-primary") fs-6 px-3 py-2 rounded-pill shadow-sm">
-                            ● @t.CurrentProgressStateName
+                        <span class="status-chip @(t.CurrentProgressState == VehicleProgressState.ListoParaEntregar ? "chip-ready" : "chip-progress")">
+                            <span class="status-dot-pulse" style="background-color: @(t.CurrentProgressState == VehicleProgressState.ListoParaEntregar ? "#059669" : "#2563eb");"></span>
+                            <span>@t.CurrentProgressStateName</span>
                         </span>
                     </div>
                 </div>
@@ -84,64 +104,72 @@
 
         @if (TempData["SuccessFeedback"] != null)
         {
-            <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
-                <h4 class="alert-heading mb-1">✔️ ¡Respuesta Registrada con Éxito!</h4>
-                <p class="mb-0">@TempData["SuccessFeedback"]</p>
+            <div class="alert alert-success alert-dismissible fade show border-success shadow-sm mb-4" role="alert">
+                <div class="d-flex align-items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-success">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <strong>Respuesta registrada con éxito:</strong>
+                </div>
+                <p class="mb-0 mt-1 small">@TempData["SuccessFeedback"]</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         }
 
         @if (TempData["InfoFeedback"] != null)
         {
-            <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-                <h4 class="alert-heading mb-1">ℹ️ Información</h4>
-                <p class="mb-0">@TempData["InfoFeedback"]</p>
+            <div class="alert alert-info alert-dismissible fade show shadow-sm mb-4" role="alert">
+                <p class="mb-0 small">@TempData["InfoFeedback"]</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         }
 
-        <!-- Bloque 1: Stepper Visual e Intuitivo del Avance -->
-        <section class="card mb-4 shadow-sm border-0 stepper-progress-box" aria-labelledby="heading-progress">
+        <!-- Bloque 1: Stepper Visual Profesional de Avance -->
+        <section class="stepper-progress-box mb-4" aria-labelledby="heading-progress">
             <div class="stepper-header">
                 <div>
-                    <span class="badge bg-primary-subtle text-primary fw-bold text-uppercase px-2 py-1">
-                        Etapa @(currentStepIndex + 1) de @totalStepsCount
-                    </span>
-                    <h2 id="heading-progress" class="h5 mb-0 mt-1 fw-bold text-dark">
-                        🚗 ¿Cómo va tu carro hoy?
+                    <span class="stepper-kicker">Etapa @(currentStepIndex + 1) de @totalStepsCount</span>
+                    <h2 id="heading-progress" class="stepper-title">
+                        Línea de Avance del Servicio
                     </h2>
                 </div>
-                <div class="text-end">
-                    <span class="badge bg-success-subtle text-success fw-bold px-3 py-2 fs-6">
-                        @progressPercentage% Avance Total
+                <div>
+                    <span class="stepper-metric-badge @(progressPercentage == 100 ? "ready" : "")">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>@progressPercentage% Completado</span>
                     </span>
                 </div>
             </div>
 
-            <!-- Línea de tiempo visual horizontal con nodos e iconos -->
+            <!-- Línea de tiempo horizontal moderna -->
             <div class="stepper-pills-row" role="progressbar" aria-valuenow="@progressPercentage" aria-valuemin="0" aria-valuemax="100">
                 <div class="stepper-track-bg">
                     <div class="stepper-track-fill" style="width: @progressPercentage%;"></div>
                 </div>
-                @foreach (var step in t.ProgressSteps)
+                @for (int idx = 0; idx < t.ProgressSteps.Count; idx++)
                 {
+                    var step = t.ProgressSteps[idx];
                     var nodeClass = step.IsCurrent ? "stepper-node current" : (step.IsCompleted ? "stepper-node completed" : "stepper-node pending");
-                    var stepIcon = step.State switch {
-                        VehicleProgressState.Recibido => "📥",
-                        VehicleProgressState.Diagnostico => "🔍",
-                        VehicleProgressState.Reparacion => "🛠️",
-                        VehicleProgressState.ControlDeCalidad => "🛡️",
-                        VehicleProgressState.ListoParaEntregar => "🚗",
-                        _ => "🎉"
-                    };
 
                     <div class="@nodeClass">
                         <div class="stepper-node-circle" title="@step.Name">
                             @if (step.IsCompleted && !step.IsCurrent)
                             {
-                                <span>✓</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            }
+                            else if (step.IsCurrent)
+                            {
+                                <span class="fw-bold">@(idx + 1)</span>
                             }
                             else
                             {
-                                <span>@stepIcon</span>
+                                <span class="fw-medium text-slate-400">@(idx + 1)</span>
                             }
                         </div>
                         <span class="stepper-node-label">@step.Name</span>
@@ -151,31 +179,41 @@
 
             @if (!string.IsNullOrWhiteSpace(t.CurrentProgressStateDescription))
             {
-                <div class="mt-4 p-3 bg-light rounded-3 border-start border-4 border-primary">
-                    <div class="d-flex align-items-center gap-2 mb-1">
-                        <span class="fs-5">👨‍🔧</span>
-                        <strong class="text-dark">Actualización técnica de taller:</strong>
+                <div class="technician-update-box">
+                    <div class="technician-update-header">
+                        <div class="technician-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                            </svg>
+                        </div>
+                        <span>Actualización del Técnico de Servicio:</span>
                     </div>
-                    <p class="mb-0 text-secondary">@t.CurrentProgressStateDescription</p>
+                    <p class="technician-update-text">@t.CurrentProgressStateDescription</p>
                 </div>
             }
         </section>
 
-        <!-- Bloque 2: Visor 3D Interactivo del Carro y Partes Requeridas -->
-        <section class="card mb-4 vehicle-3d-card shadow" aria-labelledby="heading-3d">
-            <div class="vehicle-3d-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-                <div class="d-flex align-items-center gap-2">
-                    <span class="fs-4">🚘</span>
+        <!-- Bloque 2: Estudio de Inspección 3D del Vehículo -->
+        <section class="vehicle-3d-card mb-4" aria-labelledby="heading-3d">
+            <div class="vehicle-3d-header">
+                <div class="studio-title-box">
+                    <div class="studio-indicator-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
                     <div>
                         <h2 id="heading-3d" class="h6 mb-0 text-white fw-bold">
-                            Tu Vehículo en 3D — Diagnóstico y Partes
+                            Inspección Técnica Digital 360°
                         </h2>
-                        <small class="text-info">@t.VehicleModel · Placa @t.VehiclePlate</small>
+                        <small class="text-slate-400">@t.VehicleModel · Placa @t.VehiclePlate</small>
                     </div>
                 </div>
-                <div class="d-flex gap-2 align-items-center">
-                    <span class="badge bg-primary text-white px-3 py-1">
-                        Modo Taller 3D Activo
+                <div>
+                    <span class="badge bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1 fw-semibold">
+                        Modo Taller Interactivo
                     </span>
                 </div>
             </div>
@@ -183,97 +221,133 @@
             <!-- Contenedor del Lienzo Three.js con Overlay de Pines -->
             <div class="vehicle-3d-wrapper" id="vehicle3dContainer">
                 <div class="touch-hint-pill">
-                    👆 Arrastra con el dedo para girar 360° · Toca los puntos para ver el estado
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+                        <path d="M12 2a10 10 0 0 1 10 10"></path>
+                    </svg>
+                    <span>Arrastra para rotar · Pulsa los marcadores para inspeccionar</span>
                 </div>
             </div>
 
-            <!-- Barra de Herramientas para Enfoque Rápido de Partes en 3D -->
+            <!-- Barra de Herramientas de Inspección -->
             <div class="viewer-toolbar">
                 <button type="button" class="btn-viewer-tool active" data-action="reset">
-                    🔄 Vista 360°
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                    </svg>
+                    <span>Giro Libre 360°</span>
                 </button>
                 <button type="button" class="btn-viewer-tool" data-action="focus" data-target="brakes">
-                    🛑 Frenos Delanteros
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <line x1="12" y1="2" x2="12" y2="4"></line>
+                        <line x1="12" y1="20" x2="12" y2="22"></line>
+                    </svg>
+                    <span>Frenos Delanteros</span>
                 </button>
                 <button type="button" class="btn-viewer-tool" data-action="focus" data-target="wipers">
-                    🌧️ Limpiaparabrisas
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                    </svg>
+                    <span>Limpiaparabrisas</span>
                 </button>
                 <button type="button" class="btn-viewer-tool" data-action="focus" data-target="suspension">
-                    🔩 Suspensión
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M8 5h8M8 9h8M8 13h8M8 17h8"></path>
+                    </svg>
+                    <span>Suspensión</span>
                 </button>
                 <button type="button" class="btn-viewer-tool" data-action="focus" data-target="engine">
-                    ⚙️ Motor
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <line x1="6" y1="12" x2="6.01" y2="12"></line>
+                        <line x1="18" y1="12" x2="18.01" y2="12"></line>
+                    </svg>
+                    <span>Compartimiento Motor</span>
                 </button>
                 <button type="button" class="btn-viewer-tool" data-action="toggle-lift" id="btnToggleLift">
-                    ⬆️ Subir / Bajar en Rampa
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="19" x2="12" y2="5"></line>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                    </svg>
+                    <span>Elevador Hidráulico</span>
                 </button>
             </div>
 
-            <!-- ¿Qué le están haciendo a tu carro ahora? (Tiempo Real) -->
+            <!-- Banner de Operación en Tiempo Real -->
             <div class="status-doing-banner">
-                <div class="d-flex align-items-start gap-2">
-                    <span class="status-doing-badge">
-                        🛠️ ¿Qué le están haciendo a tu carro ahora?
-                    </span>
+                <div class="status-doing-badge">
+                    <span class="status-dot-pulse" style="width: 6px; height: 6px; background-color: #60a5fa;"></span>
+                    <span>Operación en Curso en Taller</span>
                 </div>
                 <p class="status-doing-text" id="statusDoingText">
                     @if (t.CurrentProgressState == VehicleProgressState.Diagnostico)
                     {
                         <span>
-                            <strong>Inspección técnica en elevador:</strong> Tu vehículo está montado en el elevador hidráulico. El mecánico especialista está midiendo el grosor de las pastillas y evaluando discos de freno y suspensión.
+                            <strong>Inspección técnica en elevador:</strong> Vehículo posicionado en la bahía de diagnóstico. Medición de tolerancia de pastillas, espesor de discos y comprobación de tren delantero.
                         </span>
                     }
                     else if (t.CurrentProgressState == VehicleProgressState.Reparacion)
                     {
                         <span>
-                            <strong>Proceso de reparación activo:</strong> El técnico asignado está instalando los repuestos autorizados y realizando los ajustes de torque correspondientes.
+                            <strong>Reparación activa:</strong> Instalación de repuestos autorizados y ajuste con torquímetro según especificaciones del fabricante.
                         </span>
                     }
                     else if (t.CurrentProgressState == VehicleProgressState.ControlDeCalidad)
                     {
                         <span>
-                            <strong>Control de calidad y pruebas dinámicas:</strong> Verificando la frenada en dinamómetro y comprobando la seguridad integral antes de entrega.
+                            <strong>Control de calidad final:</strong> Prueba dinámica de frenado, alineación electrónica y revisión integral de seguridad antes de entrega.
                         </span>
                     }
                     else if (t.CurrentProgressState == VehicleProgressState.ListoParaEntregar)
                     {
                         <span>
-                            <strong>Vehículo alistado y listo:</strong> Todos los trabajos fueron culminados con éxito. Tu carro está limpio y listo para ser recogido.
+                            <strong>Servicio finalizado:</strong> Todos los procedimientos culminaron satisfactoriamente. El vehículo se encuentra en zona de entrega.
                         </span>
                     }
                     else
                     {
                         <span>
-                            <strong>Recepción e inventario:</strong> Tu carro ingresó a las instalaciones del taller y se asignó puesto de trabajo.
+                            <strong>Recepción e inventario:</strong> Ingreso registrado en sistema, asignación de bahía e inicio de hoja de vida de taller.
                         </span>
                     }
                 </p>
             </div>
         </section>
 
-        <!-- Bloque 2: Trabajos Adicionales Encontrados -->
-        <section class="card shadow-sm section-quotes mb-4" aria-labelledby="heading-quotes">
-            <div class="card-header bg-light py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
-                <h2 id="heading-quotes" class="h5 mb-0 text-primary-dark">
-                    🔧 Trabajos Adicionales Detectados
+        <!-- Bloque 3: Trabajos Adicionales Encontrados -->
+        <section class="section-quotes mb-4" aria-labelledby="heading-quotes">
+            <div class="section-quotes-header">
+                <h2 id="heading-quotes" class="section-quotes-title">
+                    Trabajos Adicionales Detectados
                 </h2>
                 @if (t.Quote != null)
                 {
-                    <span class="badge @(t.Quote.Status == QuoteStatus.Respondida ? "bg-success" : (t.Quote.Status == QuoteStatus.Vencida ? "bg-secondary" : "bg-warning text-dark")) px-3 py-2">
+                    <span class="badge @(t.Quote.Status == QuoteStatus.Respondida ? "bg-success" : (t.Quote.Status == QuoteStatus.Vencida ? "bg-secondary" : "bg-warning text-dark")) px-3 py-2 fw-bold">
                         @t.Quote.StatusFriendlyName
                     </span>
                 }
             </div>
 
-            <div class="card-body">
+            <div class="p-3 p-md-4">
                 @if (!t.HasAdditionalQuote || t.Quote == null)
                 {
-                    <!-- Estado vacío acordado -->
-                    <div class="empty-state text-center py-4">
-                        <div class="empty-icon fs-1 mb-2">📋</div>
-                        <h3 class="h5 text-secondary">Por ahora no tienes trabajos adicionales pendientes de revisar</h3>
-                        <p class="text-muted mb-0">
-                            Nuestros técnicos continúan trabajando en tu vehículo según el servicio inicial acordado. Si se detecta alguna novedad durante la inspección técnica, te notificaremos por este medio.
+                    <!-- Estado vacío amigable -->
+                    <div class="text-center py-5">
+                        <div class="mb-3 text-slate-400">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <polyline points="9 15 11 17 15 13"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="h5 text-slate-800 fw-bold">No se registraron anomalías adicionales</h3>
+                        <p class="text-slate-500 mb-0 small max-w-md mx-auto">
+                            El equipo técnico continúa trabajando conforme a la orden principal acordada. Si surgiera alguna novedad en las pruebas, recibirás una notificación de inmediato.
                         </p>
                     </div>
                 }
@@ -284,162 +358,179 @@
                     @if (q.Status == QuoteStatus.Respondida && q.Response != null)
                     {
                         <!-- ESTADO RESPONDIDO: Comprobante Definitivo -->
-                        <div class="response-proof-box mb-4">
-                            <div class="alert alert-success d-flex align-items-start gap-3">
-                                <span class="fs-2">📋</span>
+                        <div class="response-proof-box">
+                            <div class="proof-stamp-header">
+                                <div class="proof-stamp-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
                                 <div>
-                                    <h3 class="h6 mb-1 text-success-emphasis fw-bold">Comprobante de Respuesta Registrada</h3>
-                                    <p class="mb-1">
-                                        Tus decisiones fueron guardadas definitivamente en el sistema del taller el <strong>@q.Response.SubmittedAtFormatted</strong>.
+                                    <h3 class="proof-stamp-title">Comprobante de Respuesta Registrada</h3>
+                                    <p class="proof-stamp-date">
+                                        Registrado formalmente en el sistema de taller el <strong>@q.Response.SubmittedAtFormatted</strong>
                                     </p>
-                                    <small class="text-muted">
-                                        Por seguridad del proceso de taller, estas decisiones ya no se pueden modificar desde el celular. Si requieres coordinar un cambio, por favor llama a Marcela al <a href="tel:@t.WorkshopPhone" class="fw-bold">@t.WorkshopPhone</a>.
-                                    </small>
                                 </div>
                             </div>
 
-                            <!-- Resumen económico respondido -->
-                            <div class="row g-3 my-3">
-                                <div class="col-12 col-md-6">
-                                    <div class="p-3 bg-light rounded border">
-                                        <div class="text-muted small">Total de adicionales propuestos:</div>
-                                        <div class="fs-5 fw-bold text-dark">@q.TotalProposedAmountFormatted</div>
-                                        <div class="small text-muted">(Base: @q.TotalProposedBaseFormatted + IVA 19%: @q.TotalProposedIvaFormatted)</div>
+                            <div class="p-3 bg-light rounded-3 border mb-4">
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <div class="small text-slate-500">Total propuesto en diagnóstico:</div>
+                                        <div class="fs-5 fw-bold text-slate-800">@q.TotalProposedAmountFormatted</div>
+                                        <div class="small text-slate-400">(Base: @q.TotalProposedBaseFormatted · IVA 19%: @q.TotalProposedIvaFormatted)</div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="p-3 bg-primary-subtle rounded border border-primary">
-                                        <div class="text-primary-dark small fw-bold">Total de adicionales autorizados:</div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="small text-primary fw-bold">Total de adicionales autorizados:</div>
                                         <div class="fs-4 fw-bold text-primary">@q.Response.TotalAuthorizedAmountFormatted</div>
-                                        <div class="small text-muted">(Base: @q.Response.TotalAuthorizedBaseFormatted + IVA 19%: @q.Response.TotalAuthorizedIvaFormatted)</div>
+                                        <div class="small text-slate-400">(Base: @q.Response.TotalAuthorizedBaseFormatted · IVA 19%: @q.Response.TotalAuthorizedIvaFormatted)</div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Detalle de decisiones ítems respondidos -->
-                            <h4 class="h6 fw-bold mt-4 mb-3">Detalle de lo que respondiste ítem por ítem:</h4>
-                            <div class="list-group">
+                            <h4 class="h6 fw-bold text-slate-800 mb-3">Detalle de autorizaciones ítem por ítem:</h4>
+                            <div class="d-flex flex-column gap-3 mb-4">
                                 @foreach (var item in q.Response.Items)
                                 {
-                                    <div class="list-group-item p-3">
+                                    <div class="p-3 bg-white rounded-3 border">
                                         <div class="d-flex justify-content-between align-items-start gap-2">
                                             <div>
-                                                <div class="d-flex align-items-center gap-2 flex-wrap">
-                                                    <span class="badge bg-secondary">@item.TypeName</span>
+                                                <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+                                                    <span class="category-tag">@item.TypeName</span>
                                                     @if (item.IsSafetyCritical)
                                                     {
-                                                        <span class="badge bg-danger">🛡️ Ítem de Seguridad</span>
+                                                        <span class="category-tag safety-tag">
+                                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                                            </svg>
+                                                            <span>Seguridad Vial</span>
+                                                        </span>
                                                     }
                                                     <button type="button" class="btn-focus-3d" data-focus-part="@(item.Description.ToLower().Contains("freno") || item.Description.ToLower().Contains("pastilla") ? "brakes" : (item.Description.ToLower().Contains("plumilla") ? "wipers" : (item.Description.ToLower().Contains("amortiguador") || item.Description.ToLower().Contains("suspens") ? "suspension" : "engine")))">
-                                                        🎯 Ver en 3D
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                            <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                                                            <circle cx="12" cy="12" r="3"></circle>
+                                                        </svg>
+                                                        <span>Ver en 3D</span>
                                                     </button>
                                                 </div>
-                                                <h5 class="h6 mt-2 mb-1 fw-bold">@item.Description</h5>
-                                                <div class="text-muted small">
-                                                    Cantidad: @item.Quantity × @item.UnitPriceFormatted (IVA 19% incluido)
+                                                <h5 class="h6 fw-bold mb-1 text-slate-900">@item.Description</h5>
+                                                <div class="item-meta">
+                                                    Cantidad: @item.Quantity × @item.UnitPriceFormatted (IVA 19% incl.)
                                                 </div>
                                                 @if (item.Decision == CustomerDecision.Rechazar && item.IsSafetyCritical && item.SecurityRejectionConfirmed)
                                                 {
-                                                    <div class="mt-2 text-danger small bg-danger-subtle p-2 rounded">
-                                                        ⚠️ Rechazo de seguridad confirmado expresamente por el cliente.
+                                                    <div class="mt-2 text-danger small p-2 rounded bg-danger-subtle">
+                                                        Rechazo de componente de seguridad confirmado expresamente por el titular.
                                                     </div>
                                                 }
                                             </div>
                                             <div class="text-end">
-                                                <div class="fs-6 fw-bold mb-2">@item.TotalAmountFormatted</div>
+                                                <div class="item-price-amount mb-2">@item.TotalAmountFormatted</div>
                                                 @if (item.Decision == CustomerDecision.Aprobar)
                                                 {
-                                                    <span class="badge bg-success fs-6 py-2 px-3">✔️ Aprobado</span>
+                                                    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-bold">
+                                                        Aprobado
+                                                    </span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="badge bg-danger fs-6 py-2 px-3">✖️ Rechazado</span>
+                                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2 fw-bold">
+                                                        Rechazado
+                                                    </span>
                                                 }
                                             </div>
                                         </div>
                                     </div>
                                 }
                             </div>
+
+                            <div class="alert alert-light border small text-slate-600 mb-0">
+                                <strong>Nota de Seguridad del Taller:</strong> Esta autorización ha sido consolidada en el registro operativo del taller. Si deseas adicionar un trabajo complementario o revisar repuestos retirados, contacta a tu asesora asignada al <a href="tel:@t.WorkshopPhone" class="fw-bold">@t.WorkshopPhone</a>.
+                            </div>
                         </div>
                     }
                     else if (q.Status == QuoteStatus.Vencida)
                     {
                         <!-- ESTADO VENCIDO (> 48 horas continuas) -->
-                        <div class="alert alert-warning border-warning shadow-sm p-4 mb-4">
-                            <div class="d-flex gap-3 align-items-start">
-                                <span class="fs-1">⏰</span>
-                                <div>
-                                    <h3 class="h5 fw-bold text-dark mb-2">El plazo de 48 horas para responder ha vencido</h3>
-                                    <p class="mb-2">
-                                        Esta solicitud fue publicada el <strong>@q.PublishedAtFormatted</strong> y su vigencia expiró el <strong>@q.ExpiresAtFormatted</strong>.
-                                    </p>
-                                    <p class="mb-3">
-                                        Para evitar demoras en el taller y no retener el puesto de trabajo, el formulario de autorización por celular ya no recibe respuestas.
-                                    </p>
-                                    <div class="p-3 bg-white rounded border border-warning d-inline-block">
-                                        <p class="mb-1 fw-bold text-dark">Por favor comunícate directamente con el taller:</p>
-                                        <a href="tel:@t.WorkshopPhone" class="btn btn-primary btn-call mt-1">
-                                            📞 Llamar al asesor: @t.WorkshopPhone
-                                        </a>
-                                    </div>
-                                </div>
+                        <div class="expired-banner-box mb-4">
+                            <div class="expired-header">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-warning">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <h3 class="expired-title">El plazo de confirmación ha caducado (48 Horas)</h3>
+                            </div>
+                            <p class="text-slate-600 mb-2 small">
+                                Esta cotización fue emitida el <strong>@q.PublishedAtFormatted</strong> y expiró el <strong>@q.ExpiresAtFormatted</strong>.
+                            </p>
+                            <p class="text-slate-600 mb-3 small">
+                                Por disponibilidad de bahía y vigencia de precios de distribuidores de repuestos, el formulario digital se cierra automáticamente. Para reactivar o coordinar tu trabajo:
+                            </p>
+                            <div>
+                                <a href="tel:@t.WorkshopPhone" class="btn btn-primary d-inline-flex align-items-center gap-2 fw-semibold px-4 py-2">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    <span>Llamar al Asesor de Taller: @t.WorkshopPhone</span>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Lista de ítems en modo solo lectura -->
-                        <h4 class="h6 fw-bold mb-3">Trabajos adicionales que fueron solicitados:</h4>
-                        <div class="list-group mb-3 opacity-75">
+                        <h4 class="h6 fw-bold mb-3 text-slate-700">Trabajos que fueron cotizados:</h4>
+                        <div class="d-flex flex-column gap-2 mb-3 opacity-75">
                             @foreach (var item in q.Items)
                             {
-                                <div class="list-group-item p-3">
+                                <div class="p-3 bg-light rounded-3 border">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
                                             <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-                                                <span class="badge bg-secondary">@item.TypeName</span>
+                                                <span class="category-tag">@item.TypeName</span>
                                                 @if (item.IsSafetyCritical)
                                                 {
-                                                    <span class="badge bg-danger">🛡️ Ítem de Seguridad</span>
+                                                    <span class="category-tag safety-tag">Seguridad Vial</span>
                                                 }
                                                 <button type="button" class="btn-focus-3d" data-focus-part="@(item.Description.ToLower().Contains("freno") || item.Description.ToLower().Contains("pastilla") ? "brakes" : (item.Description.ToLower().Contains("plumilla") ? "wipers" : (item.Description.ToLower().Contains("amortiguador") || item.Description.ToLower().Contains("suspens") ? "suspension" : "engine")))">
-                                                    🎯 Ver en 3D
+                                                    Ver en 3D
                                                 </button>
                                             </div>
-                                            <div class="fw-bold mt-1">@item.Description</div>
-                                            <small class="text-muted">Cantidad: @item.Quantity | Base: @item.BaseAmountFormatted + IVA: @item.IvaAmountFormatted</small>
+                                            <div class="fw-bold text-slate-800">@item.Description</div>
+                                            <small class="text-slate-500">Cantidad: @item.Quantity | Base: @item.BaseAmountFormatted + IVA 19%: @item.IvaAmountFormatted</small>
                                         </div>
-                                        <div class="text-end fw-bold fs-6">
+                                        <div class="item-price-amount">
                                             @item.TotalAmountFormatted
                                         </div>
                                     </div>
                                 </div>
                             }
                         </div>
-                        <div class="text-end text-muted small">
-                            Total propuesto: <strong>@q.TotalProposedAmountFormatted</strong>
-                        </div>
                     }
                     else
                     {
                         <!-- ESTADO PENDIENTE: Formulario Activo con Decisiones Ítem por Ítem -->
-                        <div class="alert alert-primary bg-primary-subtle border-primary mb-4">
-                            <div class="d-flex gap-2 align-items-center mb-1">
-                                <span class="fs-5">⏱️</span>
-                                <strong class="text-primary-dark">Plazo de 48 horas continuas</strong>
+                        <div class="p-3 bg-slate-50 border rounded-3 mb-4 d-flex align-items-center gap-3">
+                            <div class="text-primary">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
                             </div>
-                            <p class="mb-0 small">
-                                @q.RemainingTimeText
-                            </p>
+                            <div>
+                                <strong class="text-slate-900 small d-block">Vigencia de la cotización:</strong>
+                                <span class="text-slate-600 small">@q.RemainingTimeText</span>
+                            </div>
                         </div>
 
                         <p class="instruction-lead">
-                            Revisa cada trabajo adicional a continuación. <strong>Puedes aprobar o rechazar cada uno por separado</strong> según tu necesidad:
+                            Revisa cada trabajo sugerido por el equipo técnico. <strong>Puedes autorizar o rechazar cada uno por separado</strong> según tu criterio:
                         </p>
 
                         @if (!ViewData.ModelState.IsValid)
                         {
                             <div class="alert alert-danger shadow-sm mb-4" role="alert">
-                                <h4 class="h6 fw-bold mb-2">⚠️ Por favor corrige los siguientes puntos antes de enviar:</h4>
-                                <div asp-validation-summary="All" class="mb-0 text-danger-emphasis"></div>
+                                <strong class="d-block mb-1">Por favor verifica los siguientes puntos antes de enviar:</strong>
+                                <div asp-validation-summary="All" class="mb-0 small text-danger-emphasis"></div>
                             </div>
                         }
 
@@ -448,7 +539,7 @@
                             <input type="hidden" asp-for="Input.Token" value="@Model.CurrentToken" />
                             <input type="hidden" asp-for="Input.QuoteId" value="@q.QuoteId" />
 
-                            <div class="items-container d-flex flex-column gap-3 mb-4">
+                            <div class="d-flex flex-column gap-3 mb-4">
                                 @for (int i = 0; i < q.Items.Count; i++)
                                 {
                                     var item = q.Items[i];
@@ -456,39 +547,48 @@
                                     var selectedDecision = inputItem?.Decision ?? CustomerDecision.SinSeleccionar;
                                     var isConfirmed = inputItem?.SecurityConfirmed ?? false;
 
-                                    <div class="card item-decision-card border" id="card-@item.Id" data-item-id="@item.Id" data-amount="@item.TotalAmount" data-is-safety="@item.IsSafetyCritical.ToString().ToLowerInvariant()">
+                                    <div class="item-decision-card" id="card-@item.Id" data-item-id="@item.Id" data-amount="@item.TotalAmount" data-is-safety="@item.IsSafetyCritical.ToString().ToLowerInvariant()">
                                         <input type="hidden" name="Input.Items[@i].QuoteItemId" value="@item.Id" />
                                         <input type="hidden" name="Input.Items[@i].Description" value="@item.Description" />
                                         <input type="hidden" name="Input.Items[@i].IsSafetyCritical" value="@item.IsSafetyCritical.ToString().ToLowerInvariant()" />
                                         <input type="hidden" name="Input.Items[@i].TotalAmount" value="@item.TotalAmount" />
 
-                                        <div class="card-body p-3">
+                                        <div class="item-card-inner">
                                             <!-- Encabezado del ítem -->
                                             <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
                                                 <div>
                                                     <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-                                                        <span class="badge bg-secondary">@item.TypeName</span>
+                                                        <span class="category-tag">@item.TypeName</span>
                                                         @if (item.IsSafetyCritical)
                                                         {
-                                                            <span class="badge bg-danger">🛡️ Trabajo de Seguridad (Frenos / Suspensión)</span>
+                                                            <span class="category-tag safety-tag">
+                                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                                                </svg>
+                                                                <span>Componente Crítico de Seguridad</span>
+                                                            </span>
                                                         }
                                                         <button type="button" class="btn-focus-3d" data-focus-part="@(item.Description.ToLower().Contains("freno") || item.Description.ToLower().Contains("pastilla") ? "brakes" : (item.Description.ToLower().Contains("plumilla") ? "wipers" : (item.Description.ToLower().Contains("amortiguador") || item.Description.ToLower().Contains("suspens") ? "suspension" : "engine")))">
-                                                            🎯 Ver en 3D
+                                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                                                                <circle cx="12" cy="12" r="3"></circle>
+                                                            </svg>
+                                                            <span>Ver en 3D</span>
                                                         </button>
                                                     </div>
-                                                    <h3 class="h5 fw-bold mb-1 item-title">@item.Description</h3>
-                                                    <div class="text-muted small">
-                                                        Cantidad: <strong>@item.Quantity</strong> | Precio unitario: @item.UnitPriceFormatted
+                                                    <h3 class="item-title">@item.Description</h3>
+                                                    <div class="item-meta">
+                                                        Cantidad: <strong>@item.Quantity</strong> · Valor unitario: @item.UnitPriceFormatted
                                                     </div>
                                                 </div>
-                                                <div class="text-end item-price-box">
-                                                    <div class="item-total-amount fs-5 fw-bold text-dark">@item.TotalAmountFormatted</div>
-                                                    <div class="item-tax-note text-muted small">(IVA 19% incl.)</div>
+                                                <div class="text-end">
+                                                    <div class="item-price-amount">@item.TotalAmountFormatted</div>
+                                                    <div class="item-tax-note">(IVA 19% incl.)</div>
                                                 </div>
                                             </div>
 
-                                            <!-- Opciones de decisión grandes para celular -->
-                                            <div class="decision-buttons-group my-3" role="radiogroup" aria-label="Decisión para @item.Description">
+                                            <!-- Opciones de decisión táctiles modernas -->
+                                            <div class="decision-buttons-group" role="radiogroup" aria-label="Decisión para @item.Description">
                                                 <label class="btn-decision btn-approve @(selectedDecision == CustomerDecision.Aprobar ? "active" : "")">
                                                     <input type="radio" 
                                                            name="Input.Items[@i].Decision" 
@@ -497,8 +597,10 @@
                                                            data-item-index="@i" 
                                                            @(selectedDecision == CustomerDecision.Aprobar ? "checked" : "") 
                                                            required />
-                                                    <span class="decision-icon">✔️</span>
-                                                    <span class="decision-text">Aprobar este trabajo</span>
+                                                    <svg class="decision-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                    </svg>
+                                                    <span class="decision-text">Autorizar trabajo</span>
                                                 </label>
 
                                                 <label class="btn-decision btn-reject @(selectedDecision == CustomerDecision.Rechazar ? "active" : "")">
@@ -509,36 +611,39 @@
                                                            data-item-index="@i" 
                                                            @(selectedDecision == CustomerDecision.Rechazar ? "checked" : "") 
                                                            required />
-                                                    <span class="decision-icon">✖️</span>
-                                                    <span class="decision-text">Rechazar este trabajo</span>
+                                                    <svg class="decision-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                    </svg>
+                                                    <span class="decision-text">No autorizar</span>
                                                 </label>
                                             </div>
 
                                             <!-- Advertencia de seguridad condicional -->
                                             @if (item.IsSafetyCritical)
                                             {
-                                                <div class="security-warning-box mt-3 p-3 bg-danger-subtle border border-danger rounded @(selectedDecision == CustomerDecision.Rechazar ? "" : "d-none")" id="security-warning-@i">
-                                                    <div class="d-flex gap-2 align-items-start">
-                                                        <span class="fs-4">⚠️</span>
-                                                        <div>
-                                                            <strong class="text-danger-emphasis d-block mb-1">
-                                                                Estás rechazando un trabajo relacionado con la seguridad de tu vehículo.
-                                                            </strong>
-                                                            <p class="small text-danger-emphasis mb-2">
-                                                                Este componente (frenos, dirección, suspensión o llantas) es indispensable para la conducción segura. Revisa el detalle antes de continuar. Para confirmar tu decisión de no realizarlo, marca la siguiente casilla:
-                                                            </p>
-                                                            <div class="form-check security-check-container">
-                                                                <input class="form-check-input security-checkbox" 
-                                                                       type="checkbox" 
-                                                                       name="Input.Items[@i].SecurityConfirmed" 
-                                                                       id="secConfirm-@i" 
-                                                                       value="true" 
-                                                                       @(isConfirmed ? "checked" : "") />
-                                                                <label class="form-check-label fw-bold small text-danger" for="secConfirm-@i">
-                                                                    Confirmo expresamente que decido NO realizar este trabajo de seguridad.
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                                <div class="security-warning-box @(selectedDecision == CustomerDecision.Rechazar ? "" : "d-none")" id="security-warning-@i">
+                                                    <div class="security-warning-header">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-danger">
+                                                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                                                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                                        </svg>
+                                                        <span>Aviso de Seguridad Vial y Garantía</span>
+                                                    </div>
+                                                    <p class="security-warning-desc">
+                                                        Este componente interviene directamente en la capacidad de detención y estabilidad de tu vehículo. Al rechazarlo, asumes la responsabilidad técnica de conducir con esta pieza desgastada.
+                                                    </p>
+                                                    <div class="security-check-container">
+                                                        <input class="form-check-input security-checkbox" 
+                                                               type="checkbox" 
+                                                               name="Input.Items[@i].SecurityConfirmed" 
+                                                               id="secConfirm-@i" 
+                                                               value="true" 
+                                                               @(isConfirmed ? "checked" : "") />
+                                                        <label class="form-check-label" for="secConfirm-@i">
+                                                            Entiendo los riesgos y confirmo expresamente NO realizar este trabajo de seguridad.
+                                                        </label>
                                                     </div>
                                                 </div>
                                             }
@@ -548,44 +653,53 @@
                             </div>
 
                             <!-- Resumen económico en tiempo real -->
-                            <div class="card summary-card bg-light border-primary p-3 mb-4 shadow-sm">
+                            <div class="summary-receipt-card">
                                 <div class="row align-items-center g-2">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="text-muted small">Total de adicionales propuestos:</div>
-                                        <div class="fs-6 fw-bold text-secondary">@q.TotalProposedAmountFormatted</div>
+                                    <div class="col-12 col-sm-6 summary-proposed-box">
+                                        <div class="summary-total-title">Total de adicionales cotizados:</div>
+                                        <div class="fs-6 fw-bold text-slate-700">@q.TotalProposedAmountFormatted</div>
                                     </div>
-                                    <div class="col-12 col-sm-6 text-sm-end">
-                                        <div class="text-primary-dark small fw-bold">Total de adicionales autorizados:</div>
-                                        <div class="fs-4 fw-bold text-primary" id="liveAuthorizedTotal">$0</div>
-                                        <div class="small text-muted" id="liveSelectionCount">0 de @q.Items.Count trabajos seleccionados</div>
+                                    <div class="col-12 col-sm-6 summary-authorized-box">
+                                        <div class="summary-total-title text-primary">Total autorizado por ti:</div>
+                                        <div class="summary-total-amount" id="liveAuthorizedTotal">$0</div>
+                                        <div class="summary-count-sub" id="liveSelectionCount">0 de @q.Items.Count seleccionados</div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Advertencia de envío definitivo y botón de acción -->
-                            <div class="alert alert-warning border-warning p-3 mb-4">
-                                <div class="d-flex gap-2 align-items-start">
-                                    <span class="fs-5">ℹ️</span>
-                                    <div class="small text-dark">
-                                        <strong>Respuesta definitiva:</strong> Una vez envíes tu respuesta, tus decisiones quedarán bloqueadas y guardadas de inmediato con fecha y hora. Si te arrepientes o requieres un cambio, deberás llamar al taller.
-                                    </div>
-                                </div>
+                            <div class="p-3 bg-light rounded-3 border mb-4 d-flex align-items-start gap-2">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-500 flex-shrink-0 mt-1">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span class="small text-slate-600">
+                                    <strong>Registro de decisión en firme:</strong> Al enviar tu respuesta, el sistema del taller iniciará de inmediato el despacho de repuestos autorizados. Modificaciones posteriores requieren contacto telefónico directo.
+                                </span>
                             </div>
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-submit-response py-3 fs-5 fw-bold shadow">
-                                    📤 Enviar mi respuesta definitiva
+                                <button type="submit" class="btn btn-submit-response">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                    <span>Confirmar y Enviar Respuesta Definitiva</span>
                                 </button>
                             </div>
 
                             <!-- Barra flotante para celular con resumen en vivo -->
-                            <div class="floating-mobile-bar shadow-lg">
+                            <div class="floating-mobile-bar">
                                 <div>
-                                    <div class="small text-muted" style="font-size:0.75rem;">Total autorizado:</div>
+                                    <div class="summary-total-title" style="font-size: 0.70rem;">Total autorizado:</div>
                                     <strong class="text-primary fs-5" id="mobileLiveAuthorizedTotal">$0</strong>
                                 </div>
-                                <button type="submit" class="btn btn-primary fw-bold px-4 py-2">
-                                    Enviar respuesta 📤
+                                <button type="submit" class="btn-mobile-submit">
+                                    <span>Enviar Respuesta</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
                                 </button>
                             </div>
                         </form>
@@ -595,10 +709,10 @@
         </section>
 
         <!-- Pie de página informativo con contacto directo -->
-        <footer class="text-center text-muted small py-3 mb-5 border-top">
-            <p class="mb-1"><strong>@t.WorkshopName</strong> · Medellín, Colombia</p>
+        <footer class="text-center text-slate-500 small py-3 mb-5 border-top">
+            <p class="mb-1"><strong>@t.WorkshopName</strong> · Sede Principal · Medellín, Colombia</p>
             <p class="mb-0">
-                Línea de atención directa: <a href="tel:@t.WorkshopPhone" class="text-primary fw-bold">@t.WorkshopPhone</a>
+                Atención personalizada al cliente: <a href="tel:@t.WorkshopPhone" class="text-primary fw-bold">@t.WorkshopPhone</a>
             </p>
         </footer>
     }
@@ -769,7 +883,7 @@
                 mobileLiveTotalEl.textContent = formattedTotal;
             }
             if (liveCountEl) {
-                liveCountEl.textContent = `${answeredCount} de ${totalItems} trabajos seleccionados`;
+                liveCountEl.textContent = `${answeredCount} de ${totalItems} seleccionados`;
             }
         }
 
@@ -794,25 +908,30 @@
                 // 1. Debe haber seleccionado una opción
                 if (!approveRadio.checked && !rejectRadio.checked) {
                     hasErrors = true;
-                    card.classList.add('border-danger', 'bg-light-danger');
+                    card.style.borderColor = '#dc2626';
+                    card.style.boxShadow = '0 0 0 3px rgba(220, 38, 38, 0.15)';
                     if (!firstErrorEl) firstErrorEl = card;
                 } else {
-                    card.classList.remove('border-danger', 'bg-light-danger');
+                    card.style.borderColor = '';
+                    card.style.boxShadow = '';
                 }
 
                 // 2. Si rechazó un ítem de seguridad, debe confirmar expresamente
                 if (rejectRadio.checked && isSafety) {
                     if (securityCheckbox && !securityCheckbox.checked) {
                         hasErrors = true;
-                        warningBox.classList.add('border-3', 'shadow-sm');
-                        if (!firstErrorEl) firstErrorEl = warningBox;
+                        if (warningBox) {
+                            warningBox.style.borderColor = '#dc2626';
+                            warningBox.style.boxShadow = '0 0 0 3px rgba(220, 38, 38, 0.2)';
+                            if (!firstErrorEl) firstErrorEl = warningBox;
+                        }
                     }
                 }
             });
 
             if (hasErrors) {
                 e.preventDefault();
-                alert('Por favor selecciona una decisión (Aprobar o Rechazar) para cada ítem. Si rechazas un trabajo de seguridad, debes marcar la confirmación requerida.');
+                alert('Por favor selecciona una decisión (Autorizar o No autorizar) para cada ítem. Si decides no realizar un trabajo de seguridad vial, debes marcar la casilla de confirmación requerida.');
                 if (firstErrorEl) {
                     firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }

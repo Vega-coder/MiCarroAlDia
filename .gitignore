@@ -14,3 +14,4 @@ publish-test/
 
 ## Entornos locales
 appsettings.Local.json
+tools/

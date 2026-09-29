@@ -1,214 +1,179 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Mi Carro al Día - Panel de Demostración";
+    ViewData["Title"] = "Panel de Demostración · MiCarroAlDía";
 }
 
-<div class="container py-4">
-    <!-- Hero / Presentación del Caso -->
-    <div class="hero-box p-4 p-md-5 mb-4 rounded-3 text-white">
-        <div class="d-flex align-items-center gap-2 mb-2">
-            <span class="badge bg-light text-primary fw-bold text-uppercase px-3 py-1">Prueba 5 — Desarrollo con IA</span>
-            <span class="badge bg-info text-dark">ASP.NET Core .NET 10 LTS</span>
+<div class="container py-2">
+    <!-- Hero / Presentación de la Plataforma -->
+    <div class="hero-showcase">
+        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+            <span class="hero-badge-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>Plataforma de Servicio y Trazabilidad</span>
+            </span>
+            <span class="badge bg-slate-800 text-slate-300 border border-slate-700 py-1 px-2 font-monospace small">
+                Autofrenos del Norte
+            </span>
         </div>
-        <h1 class="display-6 fw-bold">Mi Carro al Día</h1>
-        <p class="fs-5 col-md-10">
-            Solución web responsive, mobile-first y sin usuario ni contraseña, desarrollada para <strong>Autofrenos del Norte</strong>. Permite al cliente consultar el avance de su vehículo y autorizar o rechazar trabajos adicionales ítem por ítem desde su celular.
+        <h1>Mi Carro al Día</h1>
+        <p>
+            Solución web responsive, mobile-first y sin usuario ni contraseña. Permite al cliente consultar el avance técnico de su vehículo en tiempo real y autorizar o rechazar trabajos adicionales ítem por ítem desde su celular con total transparencia.
         </p>
-        <div class="d-flex flex-wrap gap-2 pt-2">
-            <span class="badge bg-white text-dark py-2 px-3">🎯 Prioridad P0: Recorrido del Cliente</span>
-            <span class="badge bg-white text-dark py-2 px-3">🛡️ Confirmación de Seguridad</span>
-            <span class="badge bg-white text-dark py-2 px-3">⏰ 48 Horas Continuas</span>
-            <span class="badge bg-white text-dark py-2 px-3">🔒 Bloqueo Definitivo</span>
+
+        <div class="hero-stats-row">
+            <div class="hero-stat-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Acceso Seguro Sin Contraseñas</span>
+            </div>
+            <div class="hero-stat-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Aprobación Selectiva Ítem por Ítem</span>
+            </div>
+            <div class="hero-stat-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>Plazo Continuo de 48 Horas</span>
+            </div>
+            <div class="hero-stat-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Registro y Bloqueo Definitivo</span>
+            </div>
         </div>
+
         @if (TempData["GlobalMessage"] != null)
         {
-            <div class="alert alert-success alert-dismissible fade show shadow-sm mt-3" role="alert">
-                <strong>✔️ Éxito:</strong> @TempData["GlobalMessage"]
+            <div class="alert alert-success alert-dismissible fade show border-0 bg-success-subtle text-success-emphasis shadow-sm mt-3" role="alert">
+                <div class="d-flex align-items-center gap-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Actualización del Sistema:</strong> @TempData["GlobalMessage"]
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         }
     </div>
 
     <!-- Acceso Rápido a los Escenarios de Demostración -->
-    <div class="mb-4">
+    <div class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
             <div>
-                <h2 class="h4 mb-0 text-primary-dark">Escenarios de Demostración Sembrados</h2>
-                <small class="text-muted">Haz clic en cualquier tarjeta para abrir la vista móvil del cliente</small>
+                <h2 class="h5 mb-0 fw-bold text-slate-900">Órdenes y Escenarios de Prueba</h2>
+                <small class="text-slate-500">Haz clic en cualquier tarjeta para simular el recorrido del cliente desde su teléfono</small>
             </div>
             <form method="post" asp-page-handler="Reset" class="m-0">
-                <button type="submit" class="btn btn-outline-primary btn-sm shadow-sm" title="Reinicia todas las órdenes y cotizaciones a su estado original de prueba">
-                    🔄 Reiniciar datos de prueba
+                <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2 shadow-sm" title="Reinicia todas las órdenes a su estado inicial de prueba">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                    </svg>
+                    <span>Restablecer Datos de Demostración</span>
                 </button>
             </form>
         </div>
 
         <div class="row g-3">
-            <!-- Escenario 1: Cotización Pendiente (Flujo Principal P0) -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 border-primary shadow-sm hover-shadow">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <span class="badge bg-warning text-dark fw-bold">Pendiente (28h restantes)</span>
-                        <small>Token: demo-activa</small>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="plate-pill">ABC-123</span>
-                            <strong>Renault Sandero 1.6</strong>
-                        </div>
-                        <p class="card-text small text-muted">
-                            Cliente: <strong>Carlos Mario Gómez</strong><br />
-                            Estado del carro: <strong>Diagnóstico</strong><br />
-                            Contiene 3 adicionales: Pastillas de freno (Seguridad), Mano de obra (Seguridad) y Plumillas (General).
-                        </p>
-                        <div class="p-2 bg-light rounded small mb-3">
-                            <em>Permite probar la aprobación selectiva, el cálculo del 19% IVA, la advertencia de rechazo de seguridad y el envío definitivo.</em>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-white border-0 pt-0">
-                        <a asp-page="/Tracking/Index" asp-route-token="demo-activa" class="btn btn-primary w-100 fw-bold">
-                            📲 Abrir vista del cliente →
-                        </a>
+            @if (Model.ActiveCards.Count == 0)
+            {
+                <div class="col-12">
+                    <div class="p-5 text-center bg-white rounded-3 border">
+                        <p class="lead text-slate-700 mb-2">No se registran órdenes activas en el repositorio.</p>
+                        <p class="small text-slate-500 mb-3">Puedes cargar los escenarios predeterminados para continuar la evaluación.</p>
+                        <form method="post" asp-page-handler="Reset" class="d-inline">
+                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                                </svg>
+                                <span>Cargar Escenarios Iniciales</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                @foreach (var card in Model.ActiveCards)
+                {
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="scenario-card">
+                            <div class="scenario-card-header">
+                                <span class="scenario-badge-status @(card.IsAnswered ? "answered" : (card.IsExpired ? "expired" : (card.HasQuote ? "pending" : "")))">
+                                    @card.QuoteStatusName
+                                </span>
+                                <small class="text-truncate font-monospace text-slate-400" style="max-width: 130px;" title="@card.Token">
+                                    @card.Token
+                                </small>
+                            </div>
+                            <div class="scenario-card-body">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="plate-pill">@card.VehiclePlate</span>
+                                    <span class="badge bg-light text-slate-700 border small">@card.WorkshopName</span>
+                                </div>
+                                <h3 class="h6 fw-bold text-slate-900 mb-1">@card.VehicleModel</h3>
+                                <div class="small text-slate-600 mb-2">
+                                    <div>Cliente: <strong>@card.CustomerName</strong></div>
+                                    <div>Estado en taller: <strong>@card.ProgressStateName</strong></div>
+                                </div>
+                                <div class="p-2 bg-light rounded-2 small text-slate-600 mt-2 border">
+                                    @card.ItemsSummary
+                                </div>
+                            </div>
+                            <div class="scenario-card-footer">
+                                <a asp-page="/Tracking/Index" asp-route-token="@card.Token" class="btn btn-primary w-100 fw-semibold d-inline-flex align-items-center justify-content-center gap-2">
+                                    <span>
+                                        @(card.IsAnswered ? "Ver comprobante oficial" : (card.IsExpired ? "Ver orden expirada" : (card.HasQuote ? "Abrir vista de autorización" : "Consultar avance listo")))
+                                    </span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
 
-            <!-- Escenario 2: Cotización Respondida (Comprobante Bloqueado) -->
+            <!-- Enlace inválido para verificar seguridad de acceso -->
             <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 border-success shadow-sm hover-shadow">
-                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                        <span class="badge bg-light text-success fw-bold">Respondida (Bloqueada)</span>
-                        <small>Token: demo-respondida</small>
+                <div class="scenario-card border-danger-subtle">
+                    <div class="scenario-card-header bg-danger-subtle">
+                        <span class="badge bg-danger text-white fw-bold">Seguridad y Aislamiento</span>
+                        <small class="text-danger font-monospace">token-falso</small>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="plate-pill">XYZ-789</span>
-                            <strong>Chevrolet Onix Turbo</strong>
+                    <div class="scenario-card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-secondary-subtle text-secondary">Sin vehículo</span>
+                            <span class="badge bg-light text-danger border">RF-01 / RF-02</span>
                         </div>
-                        <p class="card-text small text-muted">
-                            Cliente: <strong>María Paula Restrepo</strong><br />
-                            Estado del carro: <strong>Reparación</strong><br />
-                            Respuestas ya enviadas: Amortiguadores y mano de obra aprobados, alineación rechazada.
+                        <h3 class="h6 fw-bold text-slate-900 mb-1">Control de Enlace Inválido</h3>
+                        <p class="small text-slate-600 mb-2">
+                            Si un usuario altera el token o introduce un identificador inexistente, el sistema no revela datos de ningún vehículo o taller.
                         </p>
-                        <div class="p-2 bg-light rounded small mb-3">
-                            <em>Demuestra el comprobante con fecha y hora, los totales autorizados y el bloqueo que impide cambiar la decisión desde el celular.</em>
+                        <div class="p-2 bg-light rounded-2 small text-slate-600 mt-2 border">
+                            Protege contra enumeración de placas y filtración de información privada entre clientes y talleres.
                         </div>
                     </div>
-                    <div class="card-footer bg-white border-0 pt-0">
-                        <a asp-page="/Tracking/Index" asp-route-token="demo-respondida" class="btn btn-outline-success w-100 fw-bold">
-                            📋 Ver comprobante definitivo →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Escenario 3: Cotización Vencida (> 48h continuas) -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 border-secondary shadow-sm hover-shadow">
-                    <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
-                        <span class="badge bg-dark fw-bold">Vencida (&gt;48 horas)</span>
-                        <small>Token: demo-vencida</small>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="plate-pill">KLR-456</span>
-                            <strong>Toyota Hilux 4x4</strong>
-                        </div>
-                        <p class="card-text small text-muted">
-                            Cliente: <strong>Héctor Fabio Ramírez</strong><br />
-                            Estado del carro: <strong>Diagnóstico</strong><br />
-                            Publicada hace 55 horas; el plazo de 48 horas continuas ya expiró.
-                        </p>
-                        <div class="p-2 bg-light rounded small mb-3">
-                            <em>Demuestra el bloqueo para responder por celular y la visualización destacada del teléfono del taller para llamar al asesor.</em>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-white border-0 pt-0">
-                        <a asp-page="/Tracking/Index" asp-route-token="demo-vencida" class="btn btn-outline-secondary w-100 fw-bold">
-                            ⏰ Ver vista vencida →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Escenario 4: Orden Sin Adicionales (Estado Vacío) -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 border-info shadow-sm hover-shadow">
-                    <div class="card-header bg-info text-dark d-flex justify-content-between align-items-center">
-                        <span class="badge bg-white text-dark fw-bold">Sin adicionales</span>
-                        <small>Token: demo-sin-adicionales</small>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="plate-pill">MNO-321</span>
-                            <strong>Kia Picanto Ion</strong>
-                        </div>
-                        <p class="card-text small text-muted">
-                            Cliente: <strong>Luisa Fernanda Duque</strong><br />
-                            Estado del carro: <strong>Listo para entregar</strong><br />
-                            Mantenimiento rutinario sin daños imprevistos.
-                        </p>
-                        <div class="p-2 bg-light rounded small mb-3">
-                            <em>Comprueba el mensaje de estado vacío amigable acordado y la visualización completa de la línea de tiempo del avance.</em>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-white border-0 pt-0">
-                        <a asp-page="/Tracking/Index" asp-route-token="demo-sin-adicionales" class="btn btn-outline-info w-100 fw-bold">
-                            🚗 Consultar avance listo →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Escenario 5: Aislamiento Multitenant (Serviteca del Sur) -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 border-warning shadow-sm hover-shadow">
-                    <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
-                        <span class="badge bg-dark text-white fw-bold">Otro Taller (Multitenant)</span>
-                        <small>Token: demo-taller-sur</small>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="plate-pill">SUR-555</span>
-                            <strong>Nissan Versa Advance</strong>
-                        </div>
-                        <p class="card-text small text-muted">
-                            Taller: <strong>Serviteca y Frenos del Sur</strong><br />
-                            Cliente: <strong>Andrés Felipe Uribe</strong><br />
-                            Comprueba el aislamiento entre talleres acordado para don Álvaro.
-                        </p>
-                        <div class="p-2 bg-light rounded small mb-3">
-                            <em>Verifica que la resolución del token asocia exclusivamente al taller correspondiente sin mezclar datos de clientes.</em>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-white border-0 pt-0">
-                        <a asp-page="/Tracking/Index" asp-route-token="demo-taller-sur" class="btn btn-outline-warning w-100 fw-bold text-dark">
-                            🏢 Ver aislamiento taller →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Enlace inválido para verificar seguridad -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 border-danger shadow-sm hover-shadow">
-                    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
-                        <span class="badge bg-white text-danger fw-bold">Enlace inválido</span>
-                        <small>Token: token-falso</small>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="h6 fw-bold">Control de Acceso Seguro</h3>
-                        <p class="card-text small text-muted">
-                            Si un usuario intenta alterar el identificador o ingresar un token inexistente, el sistema no revela datos de ningún vehículo.
-                        </p>
-                        <div class="p-2 bg-light rounded small mb-3">
-                            <em>Cumple RF-01 y RF-02 evitando enumeración o filtración de placas e información privada de clientes.</em>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-white border-0 pt-0">
-                        <a asp-page="/Tracking/Index" asp-route-token="token-inexistente-123" class="btn btn-outline-danger w-100 fw-bold">
-                            🛡️ Probar enlace inválido →
+                    <div class="scenario-card-footer">
+                        <a asp-page="/Tracking/Index" asp-route-token="token-inexistente-123" class="btn btn-outline-danger w-100 fw-semibold d-inline-flex align-items-center justify-content-center gap-2">
+                            <span>Probar enlace inválido</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -217,19 +182,27 @@
     </div>
 
     <!-- Prueba manual de Token -->
-    <div class="card shadow-sm border-0 bg-light p-4 mb-4">
-        <h3 class="h5 text-primary-dark mb-2">Probar un token de enlace específico</h3>
-        <p class="text-muted small mb-3">
-            Ingresa manualmente cualquier clave de acceso o abre directamente en tu navegador la URL: <code>/Tracking/{token}</code> o <code>/t/{token}</code>
+    <div class="p-4 bg-white rounded-3 border shadow-sm mb-4">
+        <h3 class="h6 fw-bold text-slate-900 mb-1">Consulta manual por token o placa</h3>
+        <p class="text-slate-500 small mb-3">
+            Ingresa directamente un token de acceso temporal para simular el ingreso desde el enlace compartido por WhatsApp:
         </p>
         <form method="post" class="row g-2 align-items-center">
             <div class="col-auto flex-grow-1">
                 <label for="customToken" class="visually-hidden">Token de acceso</label>
-                <input type="text" asp-for="CustomToken" id="customToken" class="form-control form-control-lg" placeholder="Ejemplo: demo-activa" required />
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-slate-400 border-end-0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </span>
+                    <input type="text" asp-for="CustomToken" id="customToken" class="form-control border-start-0" placeholder="Ejemplo: demo-activa" required />
+                </div>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary btn-lg px-4">
-                    Consultar vehículo
+                <button type="submit" class="btn btn-primary px-4 fw-semibold">
+                    Consultar
                 </button>
             </div>
         </form>

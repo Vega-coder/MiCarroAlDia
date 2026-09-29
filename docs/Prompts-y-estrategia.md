@@ -92,11 +92,79 @@ Corrige únicamente los defectos encontrados y agrega sus pruebas de regresión.
 
 ---
 
+### Prompt 5
+* **Momento:** Consulta de navegación para configuración de base de datos.
+* **Texto completo enviado:**
+```text
+Donde le doy
+```
+* **Por qué se escribió así:**
+  Pregunta breve para ubicar la sección de Connection String dentro del panel de Supabase.
+
+---
+
+### Prompt 6
+* **Momento:** Entrega inicial de la cadena de conexión directa de Supabase.
+* **Texto completo enviado:**
+```text
+postgresql://postgres:[YOUR-PASSWORD]@db.wquguegisippjrttyzxq.supabase.co:5432/postgres   eso dio eso es todo?
+```
+* **Por qué se escribió así:**
+  Entrega del URI directo de Supabase para validación de formato y solicitud de la contraseña.
+
+---
+
+### Prompt 7
+* **Momento:** Entrega de credenciales y Connection String del Session Pooler de Supabase.
+* **Texto completo enviado:**
+```text
+Google2404.12 contraseña 
+
+postgresql://postgres.wquguegisippjrttyzxq:Google2404.12@aws-0-us-east-1.pooler.supabase.com:5432/postgres sesion puler
+```
+* **Por qué se escribió así:**
+  Suministro de la contraseña y de la cadena de conexión IPv4 compatible (Session Pooler) para resolver la resolución DNS y conectar EF Core Npgsql con la base de datos PostgreSQL en la nube de Supabase.
+
+---
+
+### Prompt 8
+* **Momento:** Verificación de la persistencia real en base de datos.
+* **Texto completo enviado:**
+```text
+Ya tenemos eso en base de datos?
+```
+* **Por qué se escribió así:**
+  Validación del estado de creación de tablas (`workshops`, `work_orders`, `additional_quotes`, `customer_access_links`) y sembrado inicial de datos en Supabase.
+
+---
+
+### Prompt 9
+* **Momento:** Eliminación de valores quemados (hardcoded) y transición a datos 100% reactivos.
+* **Texto completo enviado:**
+```text
+Entonces quita los quemados de codigo y dejemoslo todo en datos reactivos
+```
+* **Por qué se escribió así:**
+  Instrucción directa para erradicar cualquier texto o dato estático quemado en las vistas Razor (`Index.cshtml`, `_Layout.cshtml`, `Tracking/Index.cshtml`), garantizando que la totalidad de las tarjetas, placas, estados, nombres de cliente, talleres, teléfonos, horas restantes y resúmenes de ítems se carguen y rendericen en tiempo real desde la base de datos (PostgreSQL/Supabase o En Memoria).
+
+---
+
+### Prompt 10
+* **Momento:** Publicación al repositorio remoto e inquietud sobre despliegue continuo.
+* **Texto completo enviado:**
+```text
+Publica los cambio al repo, con eso se actualiza automaticamente la publicada?
+```
+* **Por qué se escribió así:**
+   Solicitud para versionar y subir el código actualizado a GitHub (`Vega-coder/MiCarroAlDia`), preguntando si el repositorio cuenta con actualización automática (*Auto-Deploy*) en la plataforma donde se encuentre publicada la aplicación.
+
+---
+
 ## 2. Estrategia del Desarrollador y Decisiones Técnicas
 
 ### ¿Qué se construyó y por qué?
 * **Enfoque 100% en P0:** Se construyó exclusivamente el recorrido del cliente (consulta de vehículo, revisión de adicionales, decisiones por ítem, confirmación de seguridad, cómputo de 48h continuas, congelamiento de respuesta y comprobante).
-* **Persistencia en memoria concurrente:** Acorde con la condición de la prueba («no exige base de datos ni despliegue; permite datos de ejemplo»), se priorizó la robustez de las reglas de negocio sobre la infraestructura externa.
+* **Arquitectura Clean Architecture Desacoplada:** El dominio y los casos de uso son 100% agnósticos a la base de datos. Funcionan tanto en memoria para pruebas rápidas como sobre PostgreSQL (Supabase) mediante EF Core con JSONB y repositorios concretos.
 
 ### ¿Cómo se revisó lo generado por la IA y qué se corrigió?
 1. **Defecto de concurrencia y atomicidad:**
@@ -109,9 +177,12 @@ Corrige únicamente los defectos encontrados y agrega sus pruebas de regresión.
    * *Hallazgo:* Un segundo POST en una cotización ya respondida generaba un error de conflicto en el formulario en lugar de presentar el comprobante.
    * *Corrección:* `Index.cshtml.cs` detecta si la cotización ya está respondida y redirige limpiamente al comprobante con un mensaje informativo, preservando la inmutabilidad de la respuesta original.
 4. **Corrección documental:**
-   * *Hallazgo:* Se presentaban \$416.500 y \$357.000 como «ejemplo oficial del enunciado».
+   * *Hallazgo:* Se presentaban $416.500 y $357.000 como «ejemplo oficial del enunciado».
    * *Corrección:* Se aclaró que son cifras del ejemplo numérico formulado por el desarrollador en su análisis para contrastar la regla del 19% IVA, y no cifras dadas en la reunión.
    * Se retiraron declaraciones de "conformidad WCAG AA completa", precisando que se adoptaron criterios de diseño móvil accesible.
+5. **Transición a datos 100% reactivos y erradicación de valores quemados:**
+   * *Hallazgo:* La página de inicio `Index.cshtml`, el encabezado de taller en `_Layout.cshtml` y el mensaje de error de enlace contenían textos estáticos quemados ("Autofrenos del Norte", teléfono fijo 444-1234, lista fija de tarjetas).
+   * *Corrección:* Se implementó `ActiveOrderCardDto` en `Index.cshtml.cs` y se enlazó `_Layout.cshtml` con `ViewData["WorkshopName"]` y `ViewData["WorkshopPhone"]`. Toda la información (placas, modelos, clientes, talleres, estados de avance, estado de cotización, conteo de horas restantes, desglose de ítems cotizados de seguridad/general y botones de acción) se genera en tiempo real a partir de las entidades leídas de la base de datos (Supabase PostgreSQL / En Memoria). Adicionalmente, el botón `🔄 Reiniciar datos de prueba` ejecuta un re-sembrado transaccional dinámico en ambas persistencias.
 
 ---
 
@@ -125,7 +196,7 @@ Ubicación exacta de cada regla para defender la solución o modificarla en vivo
 2. **Vencimiento de 48 horas continuas:**
    * `src/MiCarroAlDia.Domain/Entities/AdditionalQuote.cs` (propiedad `ExpiresAtUtc` y método `IsExpired`)
 3. **Confirmación obligatoria para rechazo de seguridad:**
-   * `src/MiCarroAlDia.Domain/Entities/AdditionalQuote.cs` (líneas 115-120 dentro de `SubmitCustomerResponse`)
+   * `src/MiCarroAlDia.Domain/Entities/AdditionalQuote.cs` (líneas dentro de `SubmitCustomerResponse`)
 4. **Cálculo de IVA al 19% y redondeo:**
    * `src/MiCarroAlDia.Domain/Rules/PricingCalculator.cs` (método `CalculateItemAmounts`)
 5. **Inmutabilidad de respuesta y comprobante:**

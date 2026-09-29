@@ -4,53 +4,109 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>@ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="bg-light">
-    <header class="sticky-top shadow-sm">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<body>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg app-navbar">
             <div class="container">
-                <a class="navbar-brand fw-bold d-flex align-items-center gap-2" asp-page="/Index">
-                    <span>🚗</span>
-                    <span>Mi Carro al Día</span>
+                <a class="navbar-brand-custom" asp-page="/Index">
+                    <div class="brand-icon-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
+                            <circle cx="7" cy="17" r="2"></circle>
+                            <path d="M9 17h6"></path>
+                            <circle cx="17" cy="17" r="2"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="d-block lh-1">MiCarroAlDía</span>
+                        <span class="brand-tag">Portal de Taller & Servicio</span>
+                    </div>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú de navegación">
-                    <span class="navbar-toggler-icon"></span>
+
+                <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navMenu">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Index">Inicio y Escenarios</a>
+                            <a class="nav-link text-slate-300 px-3" asp-page="/Index">
+                                Centro de Escenarios
+                            </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Probar Escenarios
+                            <a class="nav-link dropdown-toggle text-slate-300 px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Casos de Demostración
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-page="/Tracking/Index" asp-route-token="demo-activa">1. Cotización Activa (P0)</a></li>
-                                <li><a class="dropdown-item" asp-page="/Tracking/Index" asp-route-token="demo-respondida">2. Respondida (Comprobante)</a></li>
-                                <li><a class="dropdown-item" asp-page="/Tracking/Index" asp-route-token="demo-vencida">3. Vencida (&gt;48 horas)</a></li>
-                                <li><a class="dropdown-item" asp-page="/Tracking/Index" asp-route-token="demo-sin-adicionales">4. Sin Adicionales (Listo)</a></li>
+                            <ul class="dropdown-menu shadow-lg border-0 mt-2">
+                                <li><a class="dropdown-item py-2" asp-page="/Tracking/Index" asp-route-token="demo-activa">1. Cotización Activa (P0)</a></li>
+                                <li><a class="dropdown-item py-2" asp-page="/Tracking/Index" asp-route-token="demo-respondida">2. Respondida (Comprobante)</a></li>
+                                <li><a class="dropdown-item py-2" asp-page="/Tracking/Index" asp-route-token="demo-vencida">3. Plazo Expirado (&gt;48 horas)</a></li>
+                                <li><a class="dropdown-item py-2" asp-page="/Tracking/Index" asp-route-token="demo-sin-adicionales">4. Avance Normal (Sin Adicionales)</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-page="/Tracking/Index" asp-route-token="demo-taller-sur">5. Taller Sur (Multitenant)</a></li>
+                                <li><a class="dropdown-item py-2" asp-page="/Tracking/Index" asp-route-token="demo-taller-sur">5. Taller Sur (Aislamiento Multitenant)</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="d-flex align-items-center text-white small gap-2">
-                        <span>Autofrenos del Norte</span>
-                        <a href="tel:+576044441234" class="btn btn-sm btn-outline-light">
-                            📞 444-1234
-                        </a>
+
+                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                        @if (ViewData["WorkshopName"] != null)
+                        {
+                            <div class="workshop-pill-online d-none d-md-inline-flex">
+                                <span class="status-dot-pulse"></span>
+                                <span>@ViewData["WorkshopName"]</span>
+                            </div>
+                            @if (ViewData["WorkshopPhone"] != null)
+                            {
+                                <a href="tel:@ViewData["WorkshopPhone"]" class="btn-nav-call" title="Llamar al taller">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    <span>@ViewData["WorkshopPhone"]</span>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <div class="workshop-pill-online d-none d-md-inline-flex">
+                                <span class="status-dot-pulse"></span>
+                                <span>Autofrenos del Norte · Sede Principal</span>
+                            </div>
+                            <a href="tel:+576044441234" class="btn-nav-call" title="Línea de Servicio">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                <span>(604) 444-1234</span>
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main role="main" class="container py-3">
+    <main role="main" class="py-4">
         @RenderBody()
     </main>
+
+    <footer class="app-footer">
+        <div class="container text-center">
+            <p class="mb-1 fw-semibold text-slate-700">MiCarroAlDía · Plataforma de Trazabilidad y Aprobaciones Digitales</p>
+            <p class="mb-0 text-slate-500">
+                Diseñado para talleres mecánicos de precisión automotriz · Cumplimiento de trazabilidad y autorización de repuestos
+            </p>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

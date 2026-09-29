@@ -252,6 +252,17 @@ Corrige únicamente los defectos encontrados y agrega sus pruebas de regresión.
 
 ---
 
+### Prompt 18
+* **Momento:** Consulta de responsividad móvil y solicitud de integración de alertas con SweetAlert2.
+* **Texto completo enviado:**
+```text
+Es 100% responsive? puedes usar sweetalert para las alertas?
+```
+* **Por qué se escribió así:**
+   Validación de la adaptación completa a pantallas de celulares Android e iOS (Mobile-First) y sustitución de los diálogos nativos del navegador (`alert`) y avisos estáticos por modales interactivos y toasts elegantes mediante la librería SweetAlert2.
+
+---
+
 ## 2. Estrategia del Desarrollador y Decisiones Técnicas
 
 ### ¿Qué se construyó y por qué?

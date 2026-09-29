@@ -63,7 +63,7 @@
                 <h2 class="h5 mb-0 fw-bold text-slate-900">Órdenes y Escenarios de Prueba</h2>
                 <small class="text-slate-500">Haz clic en cualquier tarjeta para simular el recorrido del cliente desde su teléfono</small>
             </div>
-            <form method="post" asp-page-handler="Reset" class="m-0">
+            <form method="post" asp-page-handler="Reset" id="resetForm" class="m-0">
                 <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-2 shadow-sm" title="Reinicia todas las órdenes a su estado inicial de prueba">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
@@ -197,3 +197,31 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const resetForm = document.getElementById('resetForm');
+        if (resetForm) {
+            resetForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Restablecer datos de prueba?',
+                    text: 'Se reiniciarán todas las órdenes y cotizaciones a su estado inicial de demostración.',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, restablecer',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#2563eb',
+                    cancelButtonColor: '#64748b',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        resetForm.submit();
+                    }
+                });
+            });
+        }
+    });
+    </script>
+}

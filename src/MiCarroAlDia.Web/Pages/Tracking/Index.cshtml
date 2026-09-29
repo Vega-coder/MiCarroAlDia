@@ -922,6 +922,27 @@
                         firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 });
+            } else {
+                e.preventDefault();
+                const totalText = liveTotalEl ? liveTotalEl.textContent : '$0';
+                Swal.fire({
+                    title: '¿Confirmar envío definitivo?',
+                    html: `<div style="text-align:left;">
+                             <p class="mb-2">Total autorizado: <strong style="color:#059669;font-size:1.15rem;">${totalText}</strong></p>
+                             <p class="small text-muted mb-0">Una vez enviada, tu respuesta quedará registrada con fecha y hora inmutable. No podrás modificar tus decisiones posteriormente desde tu celular.</p>
+                           </div>`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, confirmar y enviar',
+                    cancelButtonText: 'Revisar decisiones',
+                    confirmButtonColor: '#059669',
+                    cancelButtonColor: '#64748b',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             }
         });
 
